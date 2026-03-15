@@ -62,7 +62,7 @@ Antes de iniciar, é fundamental ter o Node.js instalado, pois ele inclui o npm (
 O Vite é uma ferramenta de build que oferece uma experiência de desenvolvimento front-end muito rápida. Vamos usá-lo para criar nosso projeto React.
 
 1. **Abrir o Terminal:** Navegue até a pasta onde você deseja criar o projeto (ex: `C:\Projetos` no Windows, ou `~/Documents/Projetos` no Linux/macOS).
-
+   
    ```bash
    # Exemplo no Windows
    cd C:\Users\SeuUsuario\Documents\Projetos
@@ -70,28 +70,28 @@ O Vite é uma ferramenta de build que oferece uma experiência de desenvolvimento 
    cd ~/Documents/Projetos
    ```
 2. **Criar o Projeto Vite:** Execute o comando abaixo. Ele irá perguntar o nome do projeto e qual framework usar.
-
+   
    ```bash
    npm create vite@latest
    ```
-
+   
    * **Project name:** `my-pizzaria-app` (ou o nome que preferir, mas usaremos este como exemplo).
    * **Select a framework:** `React`
    * **Select a variant:** `JavaScript` (ou `TypeScript` se o professor preferir, mas para simplificar, usaremos JavaScript).
 3. **Navegar para a Pasta do Projeto e Instalar Dependências:**
-
+   
    ```bash
    cd my-pizzaria-app
    npm install
    ```
-
+   
    * Este comando instala todas as bibliotecas e ferramentas necessárias para o projeto, definidas no arquivo `package.json`.
 4. **Rodar o Projeto para Verificar:**
-
+   
    ```bash
    npm run dev
    ```
-
+   
    * Após executar, o terminal mostrará um endereço local (ex: `http://localhost:5173/`). Abra este endereço no seu navegador. Você deverá ver a página inicial padrão do Vite + React.
    * Mantenha este terminal aberto, pois o Vite recarrega automaticamente as alterações no código.
 
@@ -116,7 +116,7 @@ Vamos adicionar o React-Bootstrap para ter acesso a componentes de UI pré-estili
      import ReactDOM from 'react-dom/client';
      import App from './App.jsx';
      import './index.css';
-
+     
      ReactDOM.createRoot(document.getElementById('root')).render(
        <React.StrictMode>
          <App />
@@ -140,7 +140,7 @@ Uma boa estrutura de pastas é crucial para a manutenção do projeto. Vamos criar 
      // src/components/Header.jsx
      import React from 'react';
      import { Navbar, Container, Nav } from 'react-bootstrap';
-
+     
      function Header() {
        return (
          <Navbar bg="dark" variant="dark" expand="lg">
@@ -159,7 +159,7 @@ Uma boa estrutura de pastas é crucial para a manutenção do projeto. Vamos criar 
          </Navbar>
        );
      }
-
+     
      export default Header;
      ```
    * **Explicação:** Usamos componentes `Navbar`, `Container` e `Nav` do React-Bootstrap para criar uma barra de navegação responsiva. O `href` será ajustado na próxima quinzena com o React Router DOM.
@@ -169,7 +169,7 @@ Uma boa estrutura de pastas é crucial para a manutenção do projeto. Vamos criar 
      // src/components/Footer.jsx
      import React from 'react';
      import { Container } from 'react-bootstrap';
-
+     
      function Footer() {
        return (
          <footer className="bg-dark text-white text-center py-3 mt-5">
@@ -179,7 +179,7 @@ Uma boa estrutura de pastas é crucial para a manutenção do projeto. Vamos criar 
          </footer>
        );
      }
-
+     
      export default Footer;
      ```
    * **Explicação:** Um rodapé simples com texto de copyright, estilizado com classes utilitárias do Bootstrap (`bg-dark`, `text-white`, `text-center`, `py-3`, `mt-5`).
@@ -192,7 +192,7 @@ Uma boa estrutura de pastas é crucial para a manutenção do projeto. Vamos criar 
      import Header from './components/Header';
      import Footer from './components/Footer';
      import { Container } from 'react-bootstrap';
-
+     
      function App() {
        return (
          <div className="d-flex flex-column min-vh-100"> {/* Garante que o footer fique no final da página */}
@@ -206,7 +206,7 @@ Uma boa estrutura de pastas é crucial para a manutenção do projeto. Vamos criar 
          </div>
        );
      }
-
+     
      export default App;
      ```
    * **Explicação:** O `App.jsx` agora age como o layout principal. Usamos `d-flex flex-column min-vh-100` no `div` principal e `flex-grow-1` no `Container` para garantir que o rodapé sempre fique na parte inferior da página, mesmo com pouco conteúdo.
@@ -216,7 +216,6 @@ Uma boa estrutura de pastas é crucial para a manutenção do projeto. Vamos criar 
 1. **Verificar no Navegador:** Volte ao navegador onde o projeto está rodando (`http://localhost:5173/`). Você deverá ver a Navbar escura no topo, o título "Bem-vindo à Pizzaria Digital!" no centro e o rodapé na parte inferior.
 2. **Revisão:** Verifique se não há erros no console do navegador (F12).
 3. **Encerramento do Vídeo/Laboratório:** Resuma o que foi feito (setup do projeto, instalação de dependências, criação de componentes básicos e organização de pastas). Mencione que na próxima quinzena será implementado o roteamento para as diferentes páginas.
-
 
 ## Quinzena 2 (Março) - Roteamento com React Router DOM
 
@@ -254,10 +253,11 @@ Nesta quinzena, os alunos aprenderão a implementar a navegação entre as diferent
 
 1. **Abrir o Terminal:** Certifique-se de estar na pasta raiz do seu projeto `my-pizzaria-app`.
 2. **Instalar a Biblioteca:**
+   
    ```bash
    npm install react-router-dom
    ```
-
+   
    * Este comando adiciona o React Router DOM às dependências do seu projeto.
 
 #### **Passo 2: Configuração Básica do Roteamento**
@@ -265,7 +265,7 @@ Nesta quinzena, os alunos aprenderão a implementar a navegação entre as diferent
 Vamos envolver nossa aplicação com o `BrowserRouter` e definir as rotas principais.
 
 1. **Envolver `App` com `BrowserRouter`:**
-
+   
    * Abra o arquivo `src/main.jsx`.
    * Importe `BrowserRouter` e envolva o componente `<App />` com ele:
      ```jsx
@@ -276,7 +276,7 @@ Vamos envolver nossa aplicação com o `BrowserRouter` e definir as rotas principa
      import App from './App.jsx';
      import './index.css';
      import { BrowserRouter } from 'react-router-dom'; // Importar BrowserRouter
-
+     
      ReactDOM.createRoot(document.getElementById('root')).render(
        <React.StrictMode>
          <BrowserRouter> {/* Envolver App com BrowserRouter */}
@@ -287,7 +287,7 @@ Vamos envolver nossa aplicação com o `BrowserRouter` e definir as rotas principa
      ```
    * Salve o arquivo.
 2. **Definir `Routes` e `Route` no `App.jsx`:**
-
+   
    * Abra o arquivo `src/App.jsx`.
    * Importe `Routes` e `Route`.
    * Crie as pastas `src/pages` e adicione arquivos vazios para as páginas que vamos criar:
@@ -303,13 +303,13 @@ Vamos envolver nossa aplicação com o `BrowserRouter` e definir as rotas principa
      import Footer from './components/Footer';
      import { Container } from 'react-bootstrap';
      import { Routes, Route } from 'react-router-dom'; // Importar Routes e Route
-
+     
      // Importar os componentes das páginas
      import HomePage from './pages/HomePage';
      import CardapioPage from './pages/CardapioPage';
      import CarrinhoPage from './pages/CarrinhoPage';
      import LoginPage from './pages/LoginPage';
-
+     
      function App() {
        return (
          <div className="d-flex flex-column min-vh-100">
@@ -327,7 +327,7 @@ Vamos envolver nossa aplicação com o `BrowserRouter` e definir as rotas principa
          </div>
        );
      }
-
+     
      export default App;
      ```
    * Salve o arquivo.
@@ -337,10 +337,11 @@ Vamos envolver nossa aplicação com o `BrowserRouter` e definir as rotas principa
 Vamos adicionar um conteúdo mínimo a cada página para que possamos identificá-las durante a navegação.
 
 1. **`src/pages/HomePage.jsx`:**
+   
    ```jsx
    // src/pages/HomePage.jsx
    import React from 'react';
-
+   
    function HomePage() {
      return (
        <div>
@@ -349,14 +350,15 @@ Vamos adicionar um conteúdo mínimo a cada página para que possamos identificá-la
        </div>
      );
    }
-
+   
    export default HomePage;
    ```
 2. **`src/pages/CardapioPage.jsx`:**
+   
    ```jsx
    // src/pages/CardapioPage.jsx
    import React from 'react';
-
+   
    function CardapioPage() {
      return (
        <div>
@@ -365,14 +367,15 @@ Vamos adicionar um conteúdo mínimo a cada página para que possamos identificá-la
        </div>
      );
    }
-
+   
    export default CardapioPage;
    ```
 3. **`src/pages/CarrinhoPage.jsx`:**
+   
    ```jsx
    // src/pages/CarrinhoPage.jsx
    import React from 'react';
-
+   
    function CarrinhoPage() {
      return (
        <div>
@@ -381,14 +384,15 @@ Vamos adicionar um conteúdo mínimo a cada página para que possamos identificá-la
        </div>
      );
    }
-
+   
    export default CarrinhoPage;
    ```
 4. **`src/pages/LoginPage.jsx`:**
+   
    ```jsx
    // src/pages/LoginPage.jsx
    import React from 'react';
-
+   
    function LoginPage() {
      return (
        <div>
@@ -397,10 +401,10 @@ Vamos adicionar um conteúdo mínimo a cada página para que possamos identificá-la
        </div>
      );
    }
-
+   
    export default LoginPage;
    ```
-
+   
    * Salve todos os arquivos das páginas.
 
 #### **Passo 4: Implementando Links de Navegação no `Header`**
@@ -415,7 +419,7 @@ Agora, vamos substituir os `href` estáticos no `Header` por componentes `Link` d
      import React from 'react';
      import { Navbar, Container, Nav } from 'react-bootstrap';
      import { Link, NavLink } from 'react-router-dom'; // Importar Link e NavLink
-
+     
      function Header() {
        return (
          <Navbar bg="dark" variant="dark" expand="lg">
@@ -434,7 +438,7 @@ Agora, vamos substituir os `href` estáticos no `Header` por componentes `Link` d
          </Navbar>
        );
      }
-
+     
      export default Header;
      ```
    * **Explicação:** O `NavLink` é usado com `as={Link}` para que ele se comporte como um `Link` do React Router DOM, mas ainda receba as classes de estilo do `Nav.Link` do React-Bootstrap. A classe `nav-link` é importante para a estilização correta.
@@ -445,15 +449,15 @@ Agora, vamos substituir os `href` estáticos no `Header` por componentes `Link` d
 Vamos criar uma rota para exibir os detalhes de uma pizza específica, usando parâmetros de rota.
 
 1. **Criar `src/pages/DetalhePizzaPage.jsx`:**
-
+   
    ```jsx
    // src/pages/DetalhePizzaPage.jsx
    import React from 'react';
    import { useParams } from 'react-router-dom'; // Importar useParams
-
+   
    function DetalhePizzaPage() {
      const { id } = useParams(); // Extrair o parâmetro 'id' da URL
-
+   
      return (
        <div>
          <h1>Detalhes da Pizza #{id}</h1>
@@ -462,11 +466,11 @@ Vamos criar uma rota para exibir os detalhes de uma pizza específica, usando par
        </div>
      );
    }
-
+   
    export default DetalhePizzaPage;
    ```
 2. **Adicionar Rota no `App.jsx`:**
-
+   
    * Abra `src/App.jsx` e adicione a nova rota dentro de `<Routes>`:
      ```jsx
      // src/App.jsx (trecho das rotas)
@@ -480,7 +484,7 @@ Vamos criar uma rota para exibir os detalhes de uma pizza específica, usando par
      ```
    * Salve o arquivo.
 3. **Testar a Rota de Detalhes:**
-
+   
    * No navegador, digite manualmente na barra de endereço: `http://localhost:5173/pizza/1` ou `http://localhost:5173/pizza/margherita`.
    * Você deverá ver a página "Detalhes da Pizza #1" (ou #margherita), confirmando que o `useParams` está funcionando.
 
@@ -489,7 +493,7 @@ Vamos criar uma rota para exibir os detalhes de uma pizza específica, usando par
 Vamos simular um login e usar `useNavigate` para redirecionar o usuário.
 
 1. **Modificar `src/pages/LoginPage.jsx`:**
-
+   
    * Importe `useNavigate`.
    * Adicione um botão e uma função que simula um login e redireciona:
      ```jsx
@@ -497,16 +501,16 @@ Vamos simular um login e usar `useNavigate` para redirecionar o usuário.
      import React from 'react';
      import { useNavigate } from 'react-router-dom'; // Importar useNavigate
      import { Button } from 'react-bootstrap';
-
+     
      function LoginPage() {
        const navigate = useNavigate(); // Inicializar useNavigate
-
+     
        const handleLogin = () => {
          // Simular um processo de login bem-sucedido
          alert('Login simulado realizado com sucesso!');
          navigate('/'); // Redirecionar para a página inicial
        };
-
+     
        return (
          <div>
            <h1>Login</h1>
@@ -515,12 +519,12 @@ Vamos simular um login e usar `useNavigate` para redirecionar o usuário.
          </div>
        );
      }
-
+     
      export default LoginPage;
      ```
    * Salve o arquivo.
 2. **Testar Navegação Programática:**
-
+   
    * No navegador, vá para a página de Login (`http://localhost:5173/login`).
    * Clique no botão "Entrar (Simulado)". Você deverá ver o alerta e ser redirecionado para a página Home.
 
@@ -529,3 +533,417 @@ Vamos simular um login e usar `useNavigate` para redirecionar o usuário.
 1. **Testar Navegação Completa:** Clique em todos os links da Navbar e verifique se as páginas corretas são exibidas sem recarregar o navegador.
 2. **Revisão:** Verifique o console do navegador para quaisquer erros ou avisos.
 3. **Encerramento do Vídeo/Laboratório:** Resuma a importância do React Router DOM para SPAs, como configurar rotas, usar `Link`/`NavLink` e `useParams`/`useNavigate`. Mencione que na próxima quinzena será abordado o gerenciamento de estado global para o carrinho de compras.
+
+---
+
+
+
+## Quinzena 3 (Março) - Gerenciamento de Estado com Context API e Reducers
+
+### Conteúdo
+
+Esta quinzena aprofundará no gerenciamento de estado em aplicações React, focando em soluções para compartilhar dados entre componentes distantes de forma eficiente. Serão abordados:
+
+* **Revisão de `useState` e `useEffect`:** Reforço sobre como esses hooks gerenciam o estado local de um componente e lidam com efeitos colaterais, respectivamente.
+* **Introdução à Context API:**
+    * **Problema do Prop Drilling:** Explicação do cenário onde props precisam ser passadas por muitos níveis de componentes, tornando o código verboso e difícil de manter.
+    * **Criação de Contexto:** Como criar um contexto para armazenar dados que precisam ser acessados por múltiplos componentes na árvore.
+    * **`Context.Provider`:** O componente que fornece o valor do contexto para todos os seus descendentes.
+    * **`useContext`:** O hook que permite aos componentes filhos consumir o valor de um contexto, eliminando a necessidade de `Context.Consumer`.
+* **`useReducer`:**
+    * **Gerenciamento de Estado Mais Complexo:** Quando `useState` se torna insuficiente para estados com lógica de atualização complexa ou que dependem de estados anteriores.
+    * **Ações e `dispatch`:** Como definir ações que descrevem o que aconteceu e usar a função `dispatch` para enviá-las ao reducer.
+    * **Função Reducer:** Uma função pura que recebe o estado atual e uma ação, e retorna um novo estado.
+* **Combinando `useContext` e `useReducer`:** A poderosa combinação para gerenciar estados globais complexos de forma organizada e escalável, similar ao Redux, mas nativo do React.
+* **Persistência de Estado Simples (ex: `localStorage`):** Como salvar e carregar o estado da aplicação (como o carrinho de compras) no armazenamento local do navegador para que os dados não sejam perdidos ao recarregar a página.
+
+### Materiais de Referência
+
+* **Documentação Oficial do React - Context:** [pt-br.reactjs.org/docs/context.html]
+* **Documentação Oficial do React - useReducer:** [pt-br.reactjs.org/docs/hooks-reference.html#usereducer]
+* **Guia Completo Context API + useReducer:** [www.freecodecamp.org/news/react-context-api-with-usereducer-hook/]
+
+### Atividade Prática: Carrinho de Compras com Context API e useReducer
+
+**Objetivo:** Implementar um carrinho de compras funcional para a Pizzaria Digital, utilizando a Context API e o hook `useReducer` para gerenciar o estado global dos itens no carrinho, com persistência de dados no `localStorage`.
+
+**Roteiro Detalhado para Vídeo e Laboratório:**
+
+#### **Passo 1: Criação do Contexto e Reducer do Carrinho**
+
+Vamos criar a estrutura para o nosso carrinho de compras, incluindo o contexto e a lógica de como o estado do carrinho será atualizado.
+
+1. **Criar Pasta `src/context`:** Se ainda não existir, crie a pasta `src/context`.
+2. **Criar `src/context/CartContext.jsx`:** Este arquivo conterá o contexto, o reducer e o provider.
+    ```jsx
+    // src/context/CartContext.jsx
+    import React, { createContext, useReducer, useEffect, useContext } from 'react';
+    
+    // 1. Definir o estado inicial do carrinho
+    const initialState = {
+      items: [],
+      total: 0,
+    };
+    
+    // 2. Definir a função reducer
+    const cartReducer = (state, action) => {
+      switch (action.type) {
+        case 'ADD_ITEM':
+          {
+            const existingItemIndex = state.items.findIndex(
+              (item) => item.id === action.payload.id
+            );
+    
+            if (existingItemIndex > -1) {
+              // Item já existe, aumentar quantidade
+              const updatedItems = [...state.items];
+              const existingItem = updatedItems[existingItemIndex];
+              const updatedItem = {
+                ...existingItem,
+                quantity: existingItem.quantity + 1,
+              };
+              updatedItems[existingItemIndex] = updatedItem;
+              return {
+                ...state,
+                items: updatedItems,
+                total: state.total + action.payload.price,
+              };
+            } else {
+              // Novo item, adicionar ao carrinho
+              const newItem = { ...action.payload, quantity: 1 };
+              return {
+                ...state,
+                items: [...state.items, newItem],
+                total: state.total + newItem.price,
+              };
+            }
+          }
+        case 'REMOVE_ITEM':
+          {
+            const existingItemIndex = state.items.findIndex(
+              (item) => item.id === action.payload.id
+            );
+    
+            if (existingItemIndex === -1) {
+              return state; // Item não encontrado
+            }
+    
+            const existingItem = state.items[existingItemIndex];
+            const updatedTotal = state.total - existingItem.price;
+    
+            if (existingItem.quantity === 1) {
+              // Remover item completamente se a quantidade for 1
+              const updatedItems = state.items.filter(
+                (item) => item.id !== action.payload.id
+              );
+              return {
+                ...state,
+                items: updatedItems,
+                total: updatedTotal,
+              };
+            } else {
+              // Diminuir quantidade do item
+              const updatedItems = [...state.items];
+              const updatedItem = {
+                ...existingItem,
+                quantity: existingItem.quantity - 1,
+              };
+              updatedItems[existingItemIndex] = updatedItem;
+              return {
+                ...state,
+                items: updatedItems,
+                total: updatedTotal,
+              };
+            }
+          }
+        case 'CLEAR_CART':
+          return initialState; // Limpar o carrinho, voltando ao estado inicial
+        default:
+          return state;
+      }
+    };
+    
+    // 3. Criar o Contexto
+    export const CartContext = createContext(initialState);
+    
+    // 4. Criar o Provider
+    export const CartProvider = ({ children }) => {
+      // Carregar estado do localStorage na inicialização
+      const storedCart = JSON.parse(localStorage.getItem('cart')) || initialState;
+      const [cartState, dispatch] = useReducer(cartReducer, storedCart);
+    
+      // Salvar estado no localStorage sempre que o carrinho mudar
+      useEffect(() => {
+        localStorage.setItem('cart', JSON.stringify(cartState));
+      }, [cartState]);
+    
+      return (
+        <CartContext.Provider value={{ cartState, dispatch }}>
+          {children}
+        </CartContext.Provider>
+      );
+    };
+    
+    // 5. Hook customizado para facilitar o uso do contexto
+    export const useCart = () => {
+      return useContext(CartContext);
+    };
+    ```
+    
+    * **Explicação:**
+        * `initialState`: Define a estrutura inicial do nosso carrinho (uma lista de itens e o total).
+        * `cartReducer`: É a função central que decide como o estado do carrinho muda em resposta a diferentes `actions` (`ADD_ITEM`, `REMOVE_ITEM`, `CLEAR_CART`).
+        * `CartContext`: O objeto de contexto criado.
+        * `CartProvider`: Um componente que envolve a aplicação e fornece o `cartState` e a função `dispatch` para todos os componentes filhos. Ele também lida com a persistência no `localStorage` usando `useEffect`.
+        * `useCart`: Um hook customizado para simplificar o consumo do contexto.
+    * Salve o arquivo.
+
+#### **Passo 2: Integrar o `CartProvider` na Aplicação**
+
+Para que o carrinho esteja disponível em toda a aplicação, precisamos envolver o `App` com o `CartProvider`.
+
+1. **Modificar `src/main.jsx`:**
+    * Importe `CartProvider` e envolva o `<App />` com ele (dentro do `BrowserRouter`):
+        ```jsx
+        // src/main.jsx
+        import 'bootstrap/dist/css/bootstrap.min.css';
+        import React from 'react';
+        import ReactDOM from 'react-dom/client';
+        import App from './App.jsx';
+        import './index.css';
+        import { BrowserRouter } from 'react-router-dom';
+        import { CartProvider } from './context/CartContext'; // Importar CartProvider
+        
+        ReactDOM.createRoot(document.getElementById('root')).render(
+          <React.StrictMode>
+            <BrowserRouter>
+              <CartProvider> {/* Envolver App com CartProvider */}
+                <App />
+              </CartProvider>
+            </BrowserRouter>
+          </React.StrictMode>,
+        );
+        ```
+    * Salve o arquivo.
+
+#### **Passo 3: Criar Componente `PizzaCard` e Consumir o Contexto**
+
+Vamos criar um componente para exibir cada pizza e um botão para adicioná-la ao carrinho.
+
+1. **Criar `src/components/PizzaCard.jsx`:**
+    ```jsx
+    // src/components/PizzaCard.jsx
+    import React from 'react';
+    import { Card, Button } from 'react-bootstrap';
+    import { useCart } from '../context/CartContext'; // Importar o hook useCart
+    
+    function PizzaCard({ pizza }) {
+      const { dispatch } = useCart(); // Obter a função dispatch do contexto
+    
+      const handleAddToCart = () => {
+        dispatch({ type: 'ADD_ITEM', payload: pizza });
+        alert(`${pizza.name} adicionada ao carrinho!`);
+      };
+    
+      return (
+        <Card style={{ width: '18rem', marginBottom: '20px' }}>
+          <Card.Img variant="top" src={pizza.image} alt={pizza.name} />
+          <Card.Body>
+            <Card.Title>{pizza.name}</Card.Title>
+            <Card.Text>
+              {pizza.description}
+              <br />
+              <strong>R$ {pizza.price.toFixed(2)}</strong>
+            </Card.Text>
+            <Button variant="primary" onClick={handleAddToCart}>Adicionar ao Carrinho</Button>
+          </Card.Body>
+        </Card>
+      );
+    }
+    
+    export default PizzaCard;
+    ```
+    
+    * **Explicação:** O componente `PizzaCard` recebe um objeto `pizza` via props. Ele usa o `useCart` para acessar a função `dispatch` e, ao clicar no botão, despacha uma ação `ADD_ITEM` com os dados da pizza.
+    * Salve o arquivo.
+
+#### **Passo 4: Exibir o Cardápio e Adicionar Pizzas**
+
+Vamos simular algumas pizzas e exibi-las na página de cardápio, permitindo que sejam adicionadas ao carrinho.
+
+1. **Modificar `src/pages/CardapioPage.jsx`:**
+    * Remova os dados `pizzas` simulados diretamente no arquivo.
+    * Importe `PizzaCard` e `Row`, `Col` do React-Bootstrap.
+    * Crie um array de pizzas simuladas.
+    * Mapeie as pizzas para renderizar `PizzaCard`s.
+        ```jsx
+        // src/pages/CardapioPage.jsx
+        import React from 'react';
+        import { Row, Col } from 'react-bootstrap';
+        import PizzaCard from '../components/PizzaCard'; // Importar PizzaCard
+        
+        // Dados de pizzas simulados
+        const pizzas = [
+          {
+            id: 'p1',
+            name: 'Pizza Margherita',
+            description: 'Molho de tomate, mussarela e manjericão.',
+            price: 45.00,
+            image: 'https://via.placeholder.com/150/FF0000/FFFFFF?text=Margherita'
+          },
+          {
+            id: 'p2',
+            name: 'Pizza Calabresa',
+            description: 'Molho de tomate, mussarela, calabresa e cebola.',
+            price: 50.00,
+            image: 'https://via.placeholder.com/150/0000FF/FFFFFF?text=Calabresa'
+          },
+          {
+            id: 'p3',
+            name: 'Pizza Frango com Catupiry',
+            description: 'Molho de tomate, mussarela, frango desfiado e catupiry.',
+            price: 55.00,
+            image: 'https://via.placeholder.com/150/00FF00/FFFFFF?text=Frango'
+          },
+        ];
+        
+        function CardapioPage() {
+          return (
+            <div>
+              <h1>Nosso Cardápio</h1>
+              <p>Escolha suas pizzas favoritas!</p>
+              <Row>
+                {pizzas.map((pizza) => (
+                  <Col key={pizza.id} sm={12} md={6} lg={4}>
+                    <PizzaCard pizza={pizza} />
+                  </Col>
+                ))}
+              </Row>
+            </div>
+          );
+        }
+        
+        export default CardapioPage;
+        ```
+    * Salve o arquivo.
+
+#### **Passo 5: Exibir e Gerenciar o Carrinho de Compras**
+
+Agora, vamos exibir os itens no carrinho e permitir que o usuário remova ou limpe o carrinho.
+
+1. **Modificar `src/pages/CarrinhoPage.jsx`:**
+    * Importe `useCart`, `ListGroup`, `Button`, `Row`, `Col`.
+    * Exiba os itens do `cartState`, com botões para remover e limpar.
+        ```jsx
+        // src/pages/CarrinhoPage.jsx
+        import React from 'react';
+        import { useCart } from '../context/CartContext'; // Importar o hook useCart
+        import { ListGroup, Button, Row, Col } from 'react-bootstrap';
+        
+        function CarrinhoPage() {
+          const { cartState, dispatch } = useCart(); // Obter estado e dispatch
+        
+          const handleRemoveItem = (id) => {
+            dispatch({ type: 'REMOVE_ITEM', payload: { id } });
+          };
+        
+          const handleClearCart = () => {
+            dispatch({ type: 'CLEAR_CART' });
+            alert('Carrinho limpo!');
+          };
+        
+          return (
+            <div>
+              <h1>Seu Carrinho de Compras</h1>
+              {cartState.items.length === 0 ? (
+                <p>Seu carrinho está vazio.</p>
+              ) : (
+                <>
+                  <ListGroup>
+                    {cartState.items.map((item) => (
+                      <ListGroup.Item key={item.id}>
+                        <Row className="align-items-center">
+                          <Col xs={6}>{item.name} (x{item.quantity})</Col>
+                          <Col xs={3}>R$ {(item.price * item.quantity).toFixed(2)}</Col>
+                          <Col xs={3} className="text-end">
+                            <Button
+                              variant="danger"
+                              size="sm"
+                              onClick={() => handleRemoveItem(item.id)}
+                            >
+                              Remover
+                            </Button>
+                          </Col>
+                        </Row>
+                      </ListGroup.Item>
+                    ))}
+                  </ListGroup>
+                  <h3 className="mt-3">Total: R$ {cartState.total.toFixed(2)}</h3>
+                  <Button variant="warning" onClick={handleClearCart} className="mt-3">
+                    Limpar Carrinho
+                  </Button>
+                  <Button variant="success" className="mt-3 ms-2">
+                    Finalizar Pedido
+                  </Button>
+                </>
+              )}
+            </div>
+          );
+        }
+        
+        export default CarrinhoPage;
+        ```
+    * Salve o arquivo.
+
+#### **Passo 6: Adicionar Contador de Itens no Header (Opcional, mas recomendado)**
+
+Para melhorar a experiência do usuário, vamos exibir o número de itens no carrinho na Navbar.
+
+1. **Modificar `src/components/Header.jsx`:**
+    * Importe `useCart` e `Badge` do React-Bootstrap.
+    * Adicione um `Badge` ao lado do link do carrinho.
+        ```jsx
+        // src/components/Header.jsx
+        import React from 'react';
+        import { Navbar, Container, Nav, Badge } from 'react-bootstrap'; // Importar Badge
+        import { Link, NavLink } from 'react-router-dom';
+        import { useCart } from '../context/CartContext'; // Importar useCart
+        
+        function Header() {
+          const { cartState } = useCart(); // Obter o estado do carrinho
+          const totalItems = cartState.items.reduce((sum, item) => sum + item.quantity, 0);
+        
+          return (
+            <Navbar bg="dark" variant="dark" expand="lg">
+              <Container>
+                <Navbar.Brand as={Link} to="/">Pizzaria Digital</Navbar.Brand>
+                <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                <Navbar.Collapse id="basic-navbar-nav">
+                  <Nav className="me-auto">
+                    <NavLink as={Link} to="/" className="nav-link">Home</NavLink>
+                    <NavLink as={Link} to="/cardapio" className="nav-link">Cardápio</NavLink>
+                    <NavLink as={Link} to="/carrinho" className="nav-link">
+                      Carrinho <Badge bg="secondary">{totalItems}</Badge> {/* Exibir total de itens */}
+                    </NavLink>
+                    <NavLink as={Link} to="/login" className="nav-link">Login</NavLink>
+                  </Nav>
+                </Navbar.Collapse>
+              </Container>
+            </Navbar>
+          );
+        }
+        
+        export default Header;
+        ```
+    * Salve o arquivo.
+
+#### **Passo 7: Verificação e Encerramento da Quinzena 3**
+
+1. **Testar o Carrinho:**
+    * No navegador, vá para a página de Cardápio (`/cardapio`). Observe o spinner de carregamento e a lista de pizzas.
+    * Clique em "Adicionar ao Carrinho" em algumas pizzas. Observe o contador no `Header` e os itens na página do Carrinho (`/carrinho`).
+    * Tente remover itens e limpar o carrinho.
+    * Recarregue a página (F5) e verifique se os itens do carrinho persistem (graças ao `localStorage`).
+2. **Revisão:** Verifique o console do navegador para quaisquer erros ou avisos.
+3. **Encerramento do Vídeo/Laboratório:** Resuma como a Context API e o `useReducer` foram usados para gerenciar o estado global do carrinho, e como o `localStorage` garante a persistência dos dados. Mencione que na próxima quinzena serão abordadas as requisições HTTP com Axios.
+
