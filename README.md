@@ -1,48 +1,48 @@
-## Quinzena 1 (Fevereiro) - IntroduÁ„o ao ReactJS, Setup com Vite e ComponentizaÁ„o
+## Quinzena 1 (Fevereiro) - Introdu√ß√£o ao ReactJS, Setup com Vite e Componentiza√ß√£o
 
-### Conte˙do
+### Conte√∫do
 
-Esta quinzena visa estabelecer a base para o desenvolvimento em ReactJS, cobrindo desde a configuraÁ„o do ambiente atÈ a criaÁ„o dos primeiros componentes reutiliz·veis. Ser„o abordados os seguintes tÛpicos:
+Esta quinzena visa estabelecer a base para o desenvolvimento em ReactJS, cobrindo desde a configura√ß√£o do ambiente at√© a cria√ß√£o dos primeiros componentes reutiliz√°veis. Ser√£o abordados os seguintes t√≥picos:
 
-* **ApresentaÁ„o da Disciplina e Objetivos:** Alinhamento com a ementa de DSA3, enfatizando o desenvolvimento front-end com ReactJS.
-* **Revis„o de JavaScript Moderno (ES6+):** Conceitos essenciais como `let`, `const`, arrow functions, desestruturaÁ„o de objetos e arrays, mÈtodos de array (`map`, `filter`, `reduce`) e mÛdulos (import/export). Estes s„o pilares para entender o cÛdigo React moderno.
-* **IntroduÁ„o ao ReactJS:**
-  * **O que È ReactJS:** Uma biblioteca JavaScript para construir interfaces de usu·rio.
-  * **Por que usar ReactJS:** Vantagens como reatividade, componentizaÁ„o, ecossistema robusto e grande comunidade.
-  * **Virtual DOM:** ExplicaÁ„o de como o React otimiza a atualizaÁ„o da interface, comparando o Virtual DOM com o DOM real.
-  * **JSX:** Sintaxe que permite escrever HTML dentro do JavaScript, facilitando a criaÁ„o de componentes visuais.
-  * **Componentes Funcionais:** A forma moderna de criar componentes no React, utilizando funÁıes JavaScript.
+* **Apresenta√ß√£o da Disciplina e Objetivos:** Alinhamento com a ementa de DSA3, enfatizando o desenvolvimento front-end com ReactJS.
+* **Revis√£o de JavaScript Moderno (ES6+):** Conceitos essenciais como `let`, `const`, arrow functions, desestrutura√ß√£o de objetos e arrays, m√©todos de array (`map`, `filter`, `reduce`) e m√≥dulos (import/export). Estes s√£o pilares para entender o c√≥digo React moderno.
+* **Introdu√ß√£o ao ReactJS:**
+  * **O que √© ReactJS:** Uma biblioteca JavaScript para construir interfaces de usu√°rio.
+  * **Por que usar ReactJS:** Vantagens como reatividade, componentiza√ß√£o, ecossistema robusto e grande comunidade.
+  * **Virtual DOM:** Explica√ß√£o de como o React otimiza a atualiza√ß√£o da interface, comparando o Virtual DOM com o DOM real.
+  * **JSX:** Sintaxe que permite escrever HTML dentro do JavaScript, facilitando a cria√ß√£o de componentes visuais.
+  * **Componentes Funcionais:** A forma moderna de criar componentes no React, utilizando fun√ß√µes JavaScript.
   * **Props (Propriedades):** Como passar dados de um componente pai para um componente filho, garantindo a unidirecionalidade do fluxo de dados.
 * **Setup do Ambiente de Desenvolvimento:**
   * **Node.js e npm/yarn:** Ferramentas essenciais para gerenciar pacotes e executar o ambiente de desenvolvimento JavaScript.
-  * **Vite:** Um bundler de prÛxima geraÁ„o que oferece uma experiÍncia de desenvolvimento extremamente r·pida, com Hot Module Replacement (HMR) instant‚neo.
-* **EstilizaÁ„o com Bootstrap e React-Bootstrap:**
+  * **Vite:** Um bundler de pr√≥xima gera√ß√£o que oferece uma experi√™ncia de desenvolvimento extremamente r√°pida, com Hot Module Replacement (HMR) instant√¢neo.
+* **Estiliza√ß√£o com Bootstrap e React-Bootstrap:**
   * **Bootstrap:** Um framework CSS popular para desenvolver interfaces responsivas e mobile-first.
-  * **React-Bootstrap:** Uma reimplementaÁ„o dos componentes do Bootstrap em React, utilizando componentes React em vez de JavaScript do Bootstrap, o que garante melhor integraÁ„o e comportamento reativo.
-* **Arquitetura de Projetos:** OrganizaÁ„o de pastas e padronizaÁ„o para manter o cÛdigo limpo, escal·vel e de f·cil manutenÁ„o (ex: `src/components`, `src/pages`, `src/services`).
-* **Componentes Reutiliz·veis:** A import‚ncia de criar componentes genÈricos que podem ser usados em diferentes partes da aplicaÁ„o, promovendo a DRY (Don't Repeat Yourself).
-* **Uso de IA para GeraÁ„o de Prompts de CÛdigo:** IntroduÁ„o a como ferramentas de IA (como GitHub Copilot, ChatGPT) podem auxiliar na geraÁ„o de boilerplate, sugestıes de cÛdigo e refatoraÁ„o, acelerando o desenvolvimento.
+  * **React-Bootstrap:** Uma reimplementa√ß√£o dos componentes do Bootstrap em React, utilizando componentes React em vez de JavaScript do Bootstrap, o que garante melhor integra√ß√£o e comportamento reativo.
+* **Arquitetura de Projetos:** Organiza√ß√£o de pastas e padroniza√ß√£o para manter o c√≥digo limpo, escal√°vel e de f√°cil manuten√ß√£o (ex: `src/components`, `src/pages`, `src/services`).
+* **Componentes Reutiliz√°veis:** A import√¢ncia de criar componentes gen√©ricos que podem ser usados em diferentes partes da aplica√ß√£o, promovendo a DRY (Don't Repeat Yourself).
+* **Uso de IA para Gera√ß√£o de Prompts de C√≥digo:** Introdu√ß√£o a como ferramentas de IA (como GitHub Copilot, ChatGPT) podem auxiliar na gera√ß√£o de boilerplate, sugest√µes de c√≥digo e refatora√ß√£o, acelerando o desenvolvimento.
 
-### Materiais de ReferÍncia
+### Materiais de Refer√™ncia
 
-* **DocumentaÁ„o Oficial do React:** [pt-br.reactjs.org/docs/getting-started.html]
-* **DocumentaÁ„o Oficial do Vite:** [vitejs.dev/guide/]
-* **DocumentaÁ„o Oficial do React-Bootstrap:** [react-bootstrap.github.io/]
+* **Documenta√ß√£o Oficial do React:** [pt-br.reactjs.org/docs/getting-started.html]
+* **Documenta√ß√£o Oficial do Vite:** [vitejs.dev/guide/]
+* **Documenta√ß√£o Oficial do React-Bootstrap:** [react-bootstrap.github.io/]
 * **Guia de JavaScript Moderno (ES6+):** [developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Statements/const]
-* **React Patterns - Componentes Reutiliz·veis:** [reactpatterns.com/]
+* **React Patterns - Componentes Reutiliz√°veis:** [reactpatterns.com/]
 * **Clean Architecture no Frontend:** [blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html]
 
-### Atividade Pr·tica: Setup do Projeto Pizzaria e Componentes Iniciais
+### Atividade Pr√°tica: Setup do Projeto Pizzaria e Componentes Iniciais
 
-**Objetivo:** Configurar o ambiente de desenvolvimento React com Vite, integrar o React-Bootstrap para estilizaÁ„o e criar os primeiros componentes reutiliz·veis para o projeto da Pizzaria Digital. Este tutorial detalhado servir· como base para o vÌdeo no YouTube e para o laboratÛrio dos alunos.
+**Objetivo:** Configurar o ambiente de desenvolvimento React com Vite, integrar o React-Bootstrap para estiliza√ß√£o e criar os primeiros componentes reutiliz√°veis para o projeto da Pizzaria Digital. Este tutorial detalhado servir√° como base para o v√≠deo no YouTube e para o laborat√≥rio dos alunos.
 
-**Roteiro Detalhado para VÌdeo e LaboratÛrio:**
+**Roteiro Detalhado para V√≠deo e Laborat√≥rio:**
 
-#### **Passo 1: PreparaÁ„o do Ambiente (VerificaÁ„o e InstalaÁ„o do Node.js)**
+#### **Passo 1: Prepara√ß√£o do Ambiente (Verifica√ß√£o e Instala√ß√£o do Node.js)**
 
-Antes de iniciar, È fundamental ter o Node.js instalado, pois ele inclui o npm (Node Package Manager), que ser· usado para gerenciar as dependÍncias do projeto. O Yarn È uma alternativa popular ao npm.
+Antes de iniciar, √© fundamental ter o Node.js instalado, pois ele inclui o npm (Node Package Manager), que ser√° usado para gerenciar as depend√™ncias do projeto. O Yarn √© uma alternativa popular ao npm.
 
-1. **Verificar InstalaÁ„o do Node.js e npm/yarn:**
+1. **Verificar Instala√ß√£o do Node.js e npm/yarn:**
    * Abra o terminal (ou Prompt de Comando/PowerShell no Windows).
    * Digite os seguintes comandos e pressione Enter:
      ```bash
@@ -50,18 +50,18 @@ Antes de iniciar, È fundamental ter o Node.js instalado, pois ele inclui o npm (
      npm -v
      yarn -v # Opcional, se preferir usar Yarn
      ```
-   * Se os comandos retornarem n˙meros de vers„o (ex: `v18.17.1`, `9.6.7`), significa que est„o instalados. Caso contr·rio, vocÍ precisar· instal·-los.
-2. **Instalar Node.js (se necess·rio):**
+   * Se os comandos retornarem n√∫meros de vers√£o (ex: `v18.17.1`, `9.6.7`), significa que est√£o instalados. Caso contr√°rio, voc√™ precisar√° instal√°-los.
+2. **Instalar Node.js (se necess√°rio):**
    * Acesse o site oficial do Node.js: [nodejs.org/pt-br/download].
-   * Baixe e instale a vers„o LTS (Long Term Support), que È a mais est·vel e recomendada para a maioria dos usu·rios.
-   * Siga as instruÁıes do instalador. Ele geralmente j· inclui o npm.
-   * ApÛs a instalaÁ„o, feche e reabra o terminal para que as alteraÁıes entrem em vigor e verifique novamente as versıes.
+   * Baixe e instale a vers√£o LTS (Long Term Support), que √© a mais est√°vel e recomendada para a maioria dos usu√°rios.
+   * Siga as instru√ß√µes do instalador. Ele geralmente j√° inclui o npm.
+   * Ap√≥s a instala√ß√£o, feche e reabra o terminal para que as altera√ß√µes entrem em vigor e verifique novamente as vers√µes.
 
-#### **Passo 2: CriaÁ„o do Projeto React com Vite**
+#### **Passo 2: Cria√ß√£o do Projeto React com Vite**
 
-O Vite È uma ferramenta de build que oferece uma experiÍncia de desenvolvimento front-end muito r·pida. Vamos us·-lo para criar nosso projeto React.
+O Vite √© uma ferramenta de build que oferece uma experi√™ncia de desenvolvimento front-end muito r√°pida. Vamos us√°-lo para criar nosso projeto React.
 
-1. **Abrir o Terminal:** Navegue atÈ a pasta onde vocÍ deseja criar o projeto (ex: `C:\Projetos` no Windows, ou `~/Documents/Projetos` no Linux/macOS).
+1. **Abrir o Terminal:** Navegue at√© a pasta onde voc√™ deseja criar o projeto (ex: `C:\Projetos` no Windows, ou `~/Documents/Projetos` no Linux/macOS).
    
    ```bash
    # Exemplo no Windows
@@ -69,7 +69,7 @@ O Vite È uma ferramenta de build que oferece uma experiÍncia de desenvolvimento 
    # Exemplo no Linux/macOS
    cd ~/Documents/Projetos
    ```
-2. **Criar o Projeto Vite:** Execute o comando abaixo. Ele ir· perguntar o nome do projeto e qual framework usar.
+2. **Criar o Projeto Vite:** Execute o comando abaixo. Ele ir√° perguntar o nome do projeto e qual framework usar.
    
    ```bash
    npm create vite@latest
@@ -78,26 +78,26 @@ O Vite È uma ferramenta de build que oferece uma experiÍncia de desenvolvimento 
    * **Project name:** `my-pizzaria-app` (ou o nome que preferir, mas usaremos este como exemplo).
    * **Select a framework:** `React`
    * **Select a variant:** `JavaScript` (ou `TypeScript` se o professor preferir, mas para simplificar, usaremos JavaScript).
-3. **Navegar para a Pasta do Projeto e Instalar DependÍncias:**
+3. **Navegar para a Pasta do Projeto e Instalar Depend√™ncias:**
    
    ```bash
    cd my-pizzaria-app
    npm install
    ```
    
-   * Este comando instala todas as bibliotecas e ferramentas necess·rias para o projeto, definidas no arquivo `package.json`.
+   * Este comando instala todas as bibliotecas e ferramentas necess√°rias para o projeto, definidas no arquivo `package.json`.
 4. **Rodar o Projeto para Verificar:**
    
    ```bash
    npm run dev
    ```
    
-   * ApÛs executar, o terminal mostrar· um endereÁo local (ex: `http://localhost:5173/`). Abra este endereÁo no seu navegador. VocÍ dever· ver a p·gina inicial padr„o do Vite + React.
-   * Mantenha este terminal aberto, pois o Vite recarrega automaticamente as alteraÁıes no cÛdigo.
+   * Ap√≥s executar, o terminal mostrar√° um endere√ßo local (ex: `http://localhost:5173/`). Abra este endere√ßo no seu navegador. Voc√™ dever√° ver a p√°gina inicial padr√£o do Vite + React.
+   * Mantenha este terminal aberto, pois o Vite recarrega automaticamente as altera√ß√µes no c√≥digo.
 
-#### **Passo 3: IntegraÁ„o do React-Bootstrap para EstilizaÁ„o**
+#### **Passo 3: Integra√ß√£o do React-Bootstrap para Estiliza√ß√£o**
 
-Vamos adicionar o React-Bootstrap para ter acesso a componentes de UI prÈ-estilizados e responsivos.
+Vamos adicionar o React-Bootstrap para ter acesso a componentes de UI pr√©-estilizados e responsivos.
 
 1. **Instalar React-Bootstrap e Bootstrap:**
    * Abra um **novo terminal** na pasta `my-pizzaria-app` (mantendo o terminal do `npm run dev` aberto).
@@ -106,9 +106,9 @@ Vamos adicionar o React-Bootstrap para ter acesso a componentes de UI prÈ-estili
      npm install react-bootstrap bootstrap
      ```
 2. **Importar o CSS do Bootstrap:**
-   * Abra o projeto no seu editor de cÛdigo (ex: VS Code).
+   * Abra o projeto no seu editor de c√≥digo (ex: VS Code).
    * Localize o arquivo `src/main.jsx` (ou `src/main.tsx` se usou TypeScript).
-   * Adicione a seguinte linha no **inÌcio** do arquivo para importar o CSS global do Bootstrap:
+   * Adicione a seguinte linha no **in√≠cio** do arquivo para importar o CSS global do Bootstrap:
      ```jsx
      // src/main.jsx
      import 'bootstrap/dist/css/bootstrap.min.css';
@@ -123,19 +123,19 @@ Vamos adicionar o React-Bootstrap para ter acesso a componentes de UI prÈ-estili
        </React.StrictMode>,
      );
      ```
-   * Salve o arquivo. VocÍ n„o ver· uma mudanÁa visual imediata, mas o Bootstrap estar· pronto para ser usado.
+   * Salve o arquivo. Voc√™ n√£o ver√° uma mudan√ßa visual imediata, mas o Bootstrap estar√° pronto para ser usado.
 
-#### **Passo 4: OrganizaÁ„o de Pastas e CriaÁ„o de Componentes B·sicos**
+#### **Passo 4: Organiza√ß√£o de Pastas e Cria√ß√£o de Componentes B√°sicos**
 
-Uma boa estrutura de pastas È crucial para a manutenÁ„o do projeto. Vamos criar algumas pastas e os primeiros componentes.
+Uma boa estrutura de pastas √© crucial para a manuten√ß√£o do projeto. Vamos criar algumas pastas e os primeiros componentes.
 
 1. **Criar Estrutura de Pastas:**
    * Dentro da pasta `src`, crie as seguintes subpastas:
-     * `src/components`: Para componentes reutiliz·veis (botıes, cards, navbar, footer).
-     * `src/pages`: Para componentes que representam p·ginas inteiras da aplicaÁ„o.
-     * `src/assets`: Para imagens, Ìcones, etc.
+     * `src/components`: Para componentes reutiliz√°veis (bot√µes, cards, navbar, footer).
+     * `src/pages`: Para componentes que representam p√°ginas inteiras da aplica√ß√£o.
+     * `src/assets`: Para imagens, √≠cones, etc.
 2. **Criar Componente `Header` (Navbar):**
-   * Crie o arquivo `src/components/Header.jsx` com o seguinte conte˙do:
+   * Crie o arquivo `src/components/Header.jsx` com o seguinte conte√∫do:
      ```jsx
      // src/components/Header.jsx
      import React from 'react';
@@ -150,7 +150,7 @@ Uma boa estrutura de pastas È crucial para a manutenÁ„o do projeto. Vamos criar 
              <Navbar.Collapse id="basic-navbar-nav">
                <Nav className="me-auto">
                  <Nav.Link href="#home">Home</Nav.Link>
-                 <Nav.Link href="#cardapio">Card·pio</Nav.Link>
+                 <Nav.Link href="#cardapio">Card√°pio</Nav.Link>
                  <Nav.Link href="#carrinho">Carrinho</Nav.Link>
                  <Nav.Link href="#login">Login</Nav.Link>
                </Nav>
@@ -162,9 +162,9 @@ Uma boa estrutura de pastas È crucial para a manutenÁ„o do projeto. Vamos criar 
      
      export default Header;
      ```
-   * **ExplicaÁ„o:** Usamos componentes `Navbar`, `Container` e `Nav` do React-Bootstrap para criar uma barra de navegaÁ„o responsiva. O `href` ser· ajustado na prÛxima quinzena com o React Router DOM.
+   * **Explica√ß√£o:** Usamos componentes `Navbar`, `Container` e `Nav` do React-Bootstrap para criar uma barra de navega√ß√£o responsiva. O `href` ser√° ajustado na pr√≥xima quinzena com o React Router DOM.
 3. **Criar Componente `Footer`:**
-   * Crie o arquivo `src/components/Footer.jsx` com o seguinte conte˙do:
+   * Crie o arquivo `src/components/Footer.jsx` com o seguinte conte√∫do:
      ```jsx
      // src/components/Footer.jsx
      import React from 'react';
@@ -174,7 +174,7 @@ Uma boa estrutura de pastas È crucial para a manutenÁ„o do projeto. Vamos criar 
        return (
          <footer className="bg-dark text-white text-center py-3 mt-5">
            <Container>
-             <p>© {new Date().getFullYear()} Pizzaria Digital. Todos os direitos reservados.</p>
+             <p>¬© {new Date().getFullYear()} Pizzaria Digital. Todos os direitos reservados.</p>
            </Container>
          </footer>
        );
@@ -182,10 +182,10 @@ Uma boa estrutura de pastas È crucial para a manutenÁ„o do projeto. Vamos criar 
      
      export default Footer;
      ```
-   * **ExplicaÁ„o:** Um rodapÈ simples com texto de copyright, estilizado com classes utilit·rias do Bootstrap (`bg-dark`, `text-white`, `text-center`, `py-3`, `mt-5`).
+   * **Explica√ß√£o:** Um rodap√© simples com texto de copyright, estilizado com classes utilit√°rias do Bootstrap (`bg-dark`, `text-white`, `text-center`, `py-3`, `mt-5`).
 4. **Integrar `Header` e `Footer` no `App.jsx`:**
    * Abra o arquivo `src/App.jsx`.
-   * Remova o conte˙do padr„o e substitua-o pelo seguinte, importando e usando os novos componentes:
+   * Remova o conte√∫do padr√£o e substitua-o pelo seguinte, importando e usando os novos componentes:
      ```jsx
      // src/App.jsx
      import React from 'react';
@@ -195,12 +195,12 @@ Uma boa estrutura de pastas È crucial para a manutenÁ„o do projeto. Vamos criar 
      
      function App() {
        return (
-         <div className="d-flex flex-column min-vh-100"> {/* Garante que o footer fique no final da p·gina */}
+         <div className="d-flex flex-column min-vh-100"> {/* Garante que o footer fique no final da p√°gina */}
            <Header />
            <Container className="flex-grow-1 mt-4">
-             {/* Conte˙do principal da aplicaÁ„o ser· renderizado aqui */}
-             <h1>Bem-vindo ‡ Pizzaria Digital!</h1>
-             <p>Explore nosso delicioso card·pio e faÁa seu pedido.</p>
+             {/* Conte√∫do principal da aplica√ß√£o ser√° renderizado aqui */}
+             <h1>Bem-vindo √† Pizzaria Digital!</h1>
+             <p>Explore nosso delicioso card√°pio e fa√ßa seu pedido.</p>
            </Container>
            <Footer />
          </div>
@@ -209,47 +209,47 @@ Uma boa estrutura de pastas È crucial para a manutenÁ„o do projeto. Vamos criar 
      
      export default App;
      ```
-   * **ExplicaÁ„o:** O `App.jsx` agora age como o layout principal. Usamos `d-flex flex-column min-vh-100` no `div` principal e `flex-grow-1` no `Container` para garantir que o rodapÈ sempre fique na parte inferior da p·gina, mesmo com pouco conte˙do.
+   * **Explica√ß√£o:** O `App.jsx` agora age como o layout principal. Usamos `d-flex flex-column min-vh-100` no `div` principal e `flex-grow-1` no `Container` para garantir que o rodap√© sempre fique na parte inferior da p√°gina, mesmo com pouco conte√∫do.
 
-#### **Passo 5: VerificaÁ„o e Encerramento da Quinzena 1**
+#### **Passo 5: Verifica√ß√£o e Encerramento da Quinzena 1**
 
-1. **Verificar no Navegador:** Volte ao navegador onde o projeto est· rodando (`http://localhost:5173/`). VocÍ dever· ver a Navbar escura no topo, o tÌtulo "Bem-vindo ‡ Pizzaria Digital!" no centro e o rodapÈ na parte inferior.
-2. **Revis„o:** Verifique se n„o h· erros no console do navegador (F12).
-3. **Encerramento do VÌdeo/LaboratÛrio:** Resuma o que foi feito (setup do projeto, instalaÁ„o de dependÍncias, criaÁ„o de componentes b·sicos e organizaÁ„o de pastas). Mencione que na prÛxima quinzena ser· implementado o roteamento para as diferentes p·ginas.
+1. **Verificar no Navegador:** Volte ao navegador onde o projeto est√° rodando (`http://localhost:5173/`). Voc√™ dever√° ver a Navbar escura no topo, o t√≠tulo "Bem-vindo √† Pizzaria Digital!" no centro e o rodap√© na parte inferior.
+2. **Revis√£o:** Verifique se n√£o h√° erros no console do navegador (F12).
+3. **Encerramento do V√≠deo/Laborat√≥rio:** Resuma o que foi feito (setup do projeto, instala√ß√£o de depend√™ncias, cria√ß√£o de componentes b√°sicos e organiza√ß√£o de pastas). Mencione que na pr√≥xima quinzena ser√° implementado o roteamento para as diferentes p√°ginas.
 
-## Quinzena 2 (MarÁo) - Roteamento com React Router DOM
+## Quinzena 2 (Mar√ßo) - Roteamento com React Router DOM
 
-### Conte˙do
+### Conte√∫do
 
-Nesta quinzena, os alunos aprender„o a implementar a navegaÁ„o entre as diferentes seÁıes da aplicaÁ„o de pizzaria utilizando o React Router DOM, uma biblioteca padr„o para roteamento em aplicaÁıes React de p·gina ˙nica (SPA).
+Nesta quinzena, os alunos aprender√£o a implementar a navega√ß√£o entre as diferentes se√ß√µes da aplica√ß√£o de pizzaria utilizando o React Router DOM, uma biblioteca padr√£o para roteamento em aplica√ß√µes React de p√°gina √∫nica (SPA).
 
-* **IntroduÁ„o ao React Router DOM:**
-  * **O que È:** Uma biblioteca para roteamento declarativo em React.
-  * **Por que usar:** Permite criar Single Page Applications (SPAs) com URLs amig·veis e navegaÁ„o sem recarregar a p·gina.
-  * **Conceitos de Roteamento SPA:** Como as SPAs simulam m˙ltiplas p·ginas usando JavaScript para renderizar diferentes componentes com base na URL.
-* **InstalaÁ„o e ConfiguraÁ„o B·sica:**
-  * `BrowserRouter`: O componente principal que envolve toda a aplicaÁ„o para habilitar o roteamento.
-  * `Routes`: Um container para definir as rotas da aplicaÁ„o.
+* **Introdu√ß√£o ao React Router DOM:**
+  * **O que √©:** Uma biblioteca para roteamento declarativo em React.
+  * **Por que usar:** Permite criar Single Page Applications (SPAs) com URLs amig√°veis e navega√ß√£o sem recarregar a p√°gina.
+  * **Conceitos de Roteamento SPA:** Como as SPAs simulam m√∫ltiplas p√°ginas usando JavaScript para renderizar diferentes componentes com base na URL.
+* **Instala√ß√£o e Configura√ß√£o B√°sica:**
+  * `BrowserRouter`: O componente principal que envolve toda a aplica√ß√£o para habilitar o roteamento.
+  * `Routes`: Um container para definir as rotas da aplica√ß√£o.
   * `Route`: O componente que mapeia um caminho (path) da URL a um componente React.
-* **NavegaÁ„o Program·tica com `useNavigate`:** Como redirecionar o usu·rio para outra rota via cÛdigo JavaScript, ˙til apÛs aÁıes como login ou submiss„o de formul·rio.
-* **Par‚metros de Rota e `useParams`:** Como extrair informaÁıes din‚micas da URL (ex: o ID de uma pizza em `/pizza/123`) usando o hook `useParams`.
-* **Links de NavegaÁ„o com `Link` e `NavLink`:**
-  * `Link`: Componente para criar links internos que evitam o recarregamento da p·gina.
-  * `NavLink`: Uma vers„o especial do `Link` que adiciona automaticamente classes de estilo (ex: `active`) quando a rota correspondente est· ativa, ideal para menus de navegaÁ„o.
-* **CriaÁ„o de Layouts Aninhados:** Como estruturar rotas para compartilhar layouts entre diferentes p·ginas, usando o componente `Outlet`.
+* **Navega√ß√£o Program√°tica com `useNavigate`:** Como redirecionar o usu√°rio para outra rota via c√≥digo JavaScript, √∫til ap√≥s a√ß√µes como login ou submiss√£o de formul√°rio.
+* **Par√¢metros de Rota e `useParams`:** Como extrair informa√ß√µes din√¢micas da URL (ex: o ID de uma pizza em `/pizza/123`) usando o hook `useParams`.
+* **Links de Navega√ß√£o com `Link` e `NavLink`:**
+  * `Link`: Componente para criar links internos que evitam o recarregamento da p√°gina.
+  * `NavLink`: Uma vers√£o especial do `Link` que adiciona automaticamente classes de estilo (ex: `active`) quando a rota correspondente est√° ativa, ideal para menus de navega√ß√£o.
+* **Cria√ß√£o de Layouts Aninhados:** Como estruturar rotas para compartilhar layouts entre diferentes p√°ginas, usando o componente `Outlet`.
 
-### Materiais de ReferÍncia
+### Materiais de Refer√™ncia
 
-* **DocumentaÁ„o Oficial do React Router DOM:** [reactrouter.com/en/main/start/overview]
+* **Documenta√ß√£o Oficial do React Router DOM:** [reactrouter.com/en/main/start/overview]
 * **Tutorial React Router DOM v6:** [www.freecodecamp.org/news/react-router-v6-tutorial/]
 
-### Atividade Pr·tica: NavegaÁ„o na Pizzaria com React Router DOM
+### Atividade Pr√°tica: Navega√ß√£o na Pizzaria com React Router DOM
 
-**Objetivo:** Implementar o roteamento para as diferentes p·ginas da Pizzaria Digital, permitindo que os usu·rios naveguem entre Home, Card·pio, Carrinho e Login, alÈm de visualizar detalhes de pizzas especÌficas.
+**Objetivo:** Implementar o roteamento para as diferentes p√°ginas da Pizzaria Digital, permitindo que os usu√°rios naveguem entre Home, Card√°pio, Carrinho e Login, al√©m de visualizar detalhes de pizzas espec√≠ficas.
 
-**Roteiro Detalhado para VÌdeo e LaboratÛrio:**
+**Roteiro Detalhado para V√≠deo e Laborat√≥rio:**
 
-#### **Passo 1: InstalaÁ„o do React Router DOM**
+#### **Passo 1: Instala√ß√£o do React Router DOM**
 
 1. **Abrir o Terminal:** Certifique-se de estar na pasta raiz do seu projeto `my-pizzaria-app`.
 2. **Instalar a Biblioteca:**
@@ -258,11 +258,11 @@ Nesta quinzena, os alunos aprender„o a implementar a navegaÁ„o entre as diferent
    npm install react-router-dom
    ```
    
-   * Este comando adiciona o React Router DOM ‡s dependÍncias do seu projeto.
+   * Este comando adiciona o React Router DOM √†s depend√™ncias do seu projeto.
 
-#### **Passo 2: ConfiguraÁ„o B·sica do Roteamento**
+#### **Passo 2: Configura√ß√£o B√°sica do Roteamento**
 
-Vamos envolver nossa aplicaÁ„o com o `BrowserRouter` e definir as rotas principais.
+Vamos envolver nossa aplica√ß√£o com o `BrowserRouter` e definir as rotas principais.
 
 1. **Envolver `App` com `BrowserRouter`:**
    
@@ -290,12 +290,12 @@ Vamos envolver nossa aplicaÁ„o com o `BrowserRouter` e definir as rotas principa
    
    * Abra o arquivo `src/App.jsx`.
    * Importe `Routes` e `Route`.
-   * Crie as pastas `src/pages` e adicione arquivos vazios para as p·ginas que vamos criar:
+   * Crie as pastas `src/pages` e adicione arquivos vazios para as p√°ginas que vamos criar:
      * `src/pages/HomePage.jsx`
      * `src/pages/CardapioPage.jsx`
      * `src/pages/CarrinhoPage.jsx`
      * `src/pages/LoginPage.jsx`
-   * Modifique `App.jsx` para definir as rotas. O `Header` e `Footer` ficar„o fora do `Routes` para serem exibidos em todas as p·ginas:
+   * Modifique `App.jsx` para definir as rotas. O `Header` e `Footer` ficar√£o fora do `Routes` para serem exibidos em todas as p√°ginas:
      ```jsx
      // src/App.jsx
      import React from 'react';
@@ -304,7 +304,7 @@ Vamos envolver nossa aplicaÁ„o com o `BrowserRouter` e definir as rotas principa
      import { Container } from 'react-bootstrap';
      import { Routes, Route } from 'react-router-dom'; // Importar Routes e Route
      
-     // Importar os componentes das p·ginas
+     // Importar os componentes das p√°ginas
      import HomePage from './pages/HomePage';
      import CardapioPage from './pages/CardapioPage';
      import CarrinhoPage from './pages/CarrinhoPage';
@@ -332,9 +332,9 @@ Vamos envolver nossa aplicaÁ„o com o `BrowserRouter` e definir as rotas principa
      ```
    * Salve o arquivo.
 
-#### **Passo 3: CriaÁ„o das P·ginas (Conte˙do Simples)**
+#### **Passo 3: Cria√ß√£o das P√°ginas (Conte√∫do Simples)**
 
-Vamos adicionar um conte˙do mÌnimo a cada p·gina para que possamos identific·-las durante a navegaÁ„o.
+Vamos adicionar um conte√∫do m√≠nimo a cada p√°gina para que possamos identific√°-las durante a navega√ß√£o.
 
 1. **`src/pages/HomePage.jsx`:**
    
@@ -345,8 +345,8 @@ Vamos adicionar um conte˙do mÌnimo a cada p·gina para que possamos identific·-la
    function HomePage() {
      return (
        <div>
-         <h1>Bem-vindo ‡ Pizzaria Digital!</h1>
-         <p>Explore nosso delicioso card·pio e faÁa seu pedido.</p>
+         <h1>Bem-vindo √† Pizzaria Digital!</h1>
+         <p>Explore nosso delicioso card√°pio e fa√ßa seu pedido.</p>
        </div>
      );
    }
@@ -362,8 +362,8 @@ Vamos adicionar um conte˙do mÌnimo a cada p·gina para que possamos identific·-la
    function CardapioPage() {
      return (
        <div>
-         <h1>Nosso Card·pio</h1>
-         <p>Aqui vocÍ encontrar· todas as nossas deliciosas pizzas.</p>
+         <h1>Nosso Card√°pio</h1>
+         <p>Aqui voc√™ encontrar√° todas as nossas deliciosas pizzas.</p>
        </div>
      );
    }
@@ -405,15 +405,15 @@ Vamos adicionar um conte˙do mÌnimo a cada p·gina para que possamos identific·-la
    export default LoginPage;
    ```
    
-   * Salve todos os arquivos das p·ginas.
+   * Salve todos os arquivos das p√°ginas.
 
-#### **Passo 4: Implementando Links de NavegaÁ„o no `Header`**
+#### **Passo 4: Implementando Links de Navega√ß√£o no `Header`**
 
-Agora, vamos substituir os `href` est·ticos no `Header` por componentes `Link` do React Router DOM.
+Agora, vamos substituir os `href` est√°ticos no `Header` por componentes `Link` do React Router DOM.
 
 1. **Modificar `src/components/Header.jsx`:**
    * Importe `Link` e `NavLink` do `react-router-dom`.
-   * Substitua `Nav.Link href="#..."` por `NavLink as={Link} to="/..."` para aproveitar a estilizaÁ„o do React-Bootstrap e a funcionalidade do `NavLink`.
+   * Substitua `Nav.Link href="#..."` por `NavLink as={Link} to="/..."` para aproveitar a estiliza√ß√£o do React-Bootstrap e a funcionalidade do `NavLink`.
      ```jsx
      // src/components/Header.jsx
      import React from 'react';
@@ -428,8 +428,8 @@ Agora, vamos substituir os `href` est·ticos no `Header` por componentes `Link` d
              <Navbar.Toggle aria-controls="basic-navbar-nav" />
              <Navbar.Collapse id="basic-navbar-nav">
                <Nav className="me-auto">
-                 <NavLink as={Link} to="/" className="nav-link">Home</NavLink> {/* NavLink para destacar a p·gina ativa */}
-                 <NavLink as={Link} to="/cardapio" className="nav-link">Card·pio</NavLink>
+                 <NavLink as={Link} to="/" className="nav-link">Home</NavLink> {/* NavLink para destacar a p√°gina ativa */}
+                 <NavLink as={Link} to="/cardapio" className="nav-link">Card√°pio</NavLink>
                  <NavLink as={Link} to="/carrinho" className="nav-link">Carrinho</NavLink>
                  <NavLink as={Link} to="/login" className="nav-link">Login</NavLink>
                </Nav>
@@ -441,12 +441,12 @@ Agora, vamos substituir os `href` est·ticos no `Header` por componentes `Link` d
      
      export default Header;
      ```
-   * **ExplicaÁ„o:** O `NavLink` È usado com `as={Link}` para que ele se comporte como um `Link` do React Router DOM, mas ainda receba as classes de estilo do `Nav.Link` do React-Bootstrap. A classe `nav-link` È importante para a estilizaÁ„o correta.
+   * **Explica√ß√£o:** O `NavLink` √© usado com `as={Link}` para que ele se comporte como um `Link` do React Router DOM, mas ainda receba as classes de estilo do `Nav.Link` do React-Bootstrap. A classe `nav-link` √© importante para a estiliza√ß√£o correta.
    * Salve o arquivo.
 
-#### **Passo 5: Par‚metros de Rota e `useParams` (Detalhe da Pizza)**
+#### **Passo 5: Par√¢metros de Rota e `useParams` (Detalhe da Pizza)**
 
-Vamos criar uma rota para exibir os detalhes de uma pizza especÌfica, usando par‚metros de rota.
+Vamos criar uma rota para exibir os detalhes de uma pizza espec√≠fica, usando par√¢metros de rota.
 
 1. **Criar `src/pages/DetalhePizzaPage.jsx`:**
    
@@ -456,12 +456,12 @@ Vamos criar uma rota para exibir os detalhes de uma pizza especÌfica, usando par
    import { useParams } from 'react-router-dom'; // Importar useParams
    
    function DetalhePizzaPage() {
-     const { id } = useParams(); // Extrair o par‚metro 'id' da URL
+     const { id } = useParams(); // Extrair o par√¢metro 'id' da URL
    
      return (
        <div>
          <h1>Detalhes da Pizza #{id}</h1>
-         <p>Aqui ser„o exibidas as informaÁıes detalhadas da pizza com ID: {id}.</p>
+         <p>Aqui ser√£o exibidas as informa√ß√µes detalhadas da pizza com ID: {id}.</p>
          {/* Em quinzenas futuras, buscaremos os dados reais da pizza aqui */}
        </div>
      );
@@ -479,23 +479,23 @@ Vamos criar uma rota para exibir os detalhes de uma pizza especÌfica, usando par
        <Route path="/cardapio" element={<CardapioPage />} />
        <Route path="/carrinho" element={<CarrinhoPage />} />
        <Route path="/login" element={<LoginPage />} />
-       <Route path="/pizza/:id" element={<DetalhePizzaPage />} /> {/* Nova rota com par‚metro */}
+       <Route path="/pizza/:id" element={<DetalhePizzaPage />} /> {/* Nova rota com par√¢metro */}
      </Routes>
      ```
    * Salve o arquivo.
 3. **Testar a Rota de Detalhes:**
    
-   * No navegador, digite manualmente na barra de endereÁo: `http://localhost:5173/pizza/1` ou `http://localhost:5173/pizza/margherita`.
-   * VocÍ dever· ver a p·gina "Detalhes da Pizza #1" (ou #margherita), confirmando que o `useParams` est· funcionando.
+   * No navegador, digite manualmente na barra de endere√ßo: `http://localhost:5173/pizza/1` ou `http://localhost:5173/pizza/margherita`.
+   * Voc√™ dever√° ver a p√°gina "Detalhes da Pizza #1" (ou #margherita), confirmando que o `useParams` est√° funcionando.
 
-#### **Passo 6: NavegaÁ„o Program·tica com `useNavigate` (Exemplo Simulado)**
+#### **Passo 6: Navega√ß√£o Program√°tica com `useNavigate` (Exemplo Simulado)**
 
-Vamos simular um login e usar `useNavigate` para redirecionar o usu·rio.
+Vamos simular um login e usar `useNavigate` para redirecionar o usu√°rio.
 
 1. **Modificar `src/pages/LoginPage.jsx`:**
    
    * Importe `useNavigate`.
-   * Adicione um bot„o e uma funÁ„o que simula um login e redireciona:
+   * Adicione um bot√£o e uma fun√ß√£o que simula um login e redireciona:
      ```jsx
      // src/pages/LoginPage.jsx
      import React from 'react';
@@ -508,7 +508,7 @@ Vamos simular um login e usar `useNavigate` para redirecionar o usu·rio.
        const handleLogin = () => {
          // Simular um processo de login bem-sucedido
          alert('Login simulado realizado com sucesso!');
-         navigate('/'); // Redirecionar para a p·gina inicial
+         navigate('/'); // Redirecionar para a p√°gina inicial
        };
      
        return (
@@ -523,58 +523,58 @@ Vamos simular um login e usar `useNavigate` para redirecionar o usu·rio.
      export default LoginPage;
      ```
    * Salve o arquivo.
-2. **Testar NavegaÁ„o Program·tica:**
+2. **Testar Navega√ß√£o Program√°tica:**
    
-   * No navegador, v· para a p·gina de Login (`http://localhost:5173/login`).
-   * Clique no bot„o "Entrar (Simulado)". VocÍ dever· ver o alerta e ser redirecionado para a p·gina Home.
+   * No navegador, v√° para a p√°gina de Login (`http://localhost:5173/login`).
+   * Clique no bot√£o "Entrar (Simulado)". Voc√™ dever√° ver o alerta e ser redirecionado para a p√°gina Home.
 
-#### **Passo 7: VerificaÁ„o e Encerramento da Quinzena 2**
+#### **Passo 7: Verifica√ß√£o e Encerramento da Quinzena 2**
 
-1. **Testar NavegaÁ„o Completa:** Clique em todos os links da Navbar e verifique se as p·ginas corretas s„o exibidas sem recarregar o navegador.
-2. **Revis„o:** Verifique o console do navegador para quaisquer erros ou avisos.
-3. **Encerramento do VÌdeo/LaboratÛrio:** Resuma a import‚ncia do React Router DOM para SPAs, como configurar rotas, usar `Link`/`NavLink` e `useParams`/`useNavigate`. Mencione que na prÛxima quinzena ser· abordado o gerenciamento de estado global para o carrinho de compras.
+1. **Testar Navega√ß√£o Completa:** Clique em todos os links da Navbar e verifique se as p√°ginas corretas s√£o exibidas sem recarregar o navegador.
+2. **Revis√£o:** Verifique o console do navegador para quaisquer erros ou avisos.
+3. **Encerramento do V√≠deo/Laborat√≥rio:** Resuma a import√¢ncia do React Router DOM para SPAs, como configurar rotas, usar `Link`/`NavLink` e `useParams`/`useNavigate`. Mencione que na pr√≥xima quinzena ser√° abordado o gerenciamento de estado global para o carrinho de compras.
 
 ---
 
 
 
-## Quinzena 3 (MarÁo) - Gerenciamento de Estado com Context API e Reducers
+## Quinzena 3 (Mar√ßo) - Gerenciamento de Estado com Context API e Reducers
 
-### Conte˙do
+### Conte√∫do
 
-Esta quinzena aprofundar· no gerenciamento de estado em aplicaÁıes React, focando em soluÁıes para compartilhar dados entre componentes distantes de forma eficiente. Ser„o abordados:
+Esta quinzena aprofundar√° no gerenciamento de estado em aplica√ß√µes React, focando em solu√ß√µes para compartilhar dados entre componentes distantes de forma eficiente. Ser√£o abordados:
 
-* **Revis„o de `useState` e `useEffect`:** ReforÁo sobre como esses hooks gerenciam o estado local de um componente e lidam com efeitos colaterais, respectivamente.
-* **IntroduÁ„o ‡ Context API:**
-    * **Problema do Prop Drilling:** ExplicaÁ„o do cen·rio onde props precisam ser passadas por muitos nÌveis de componentes, tornando o cÛdigo verboso e difÌcil de manter.
-    * **CriaÁ„o de Contexto:** Como criar um contexto para armazenar dados que precisam ser acessados por m˙ltiplos componentes na ·rvore.
+* **Revis√£o de `useState` e `useEffect`:** Refor√ßo sobre como esses hooks gerenciam o estado local de um componente e lidam com efeitos colaterais, respectivamente.
+* **Introdu√ß√£o √† Context API:**
+    * **Problema do Prop Drilling:** Explica√ß√£o do cen√°rio onde props precisam ser passadas por muitos n√≠veis de componentes, tornando o c√≥digo verboso e dif√≠cil de manter.
+    * **Cria√ß√£o de Contexto:** Como criar um contexto para armazenar dados que precisam ser acessados por m√∫ltiplos componentes na √°rvore.
     * **`Context.Provider`:** O componente que fornece o valor do contexto para todos os seus descendentes.
     * **`useContext`:** O hook que permite aos componentes filhos consumir o valor de um contexto, eliminando a necessidade de `Context.Consumer`.
 * **`useReducer`:**
-    * **Gerenciamento de Estado Mais Complexo:** Quando `useState` se torna insuficiente para estados com lÛgica de atualizaÁ„o complexa ou que dependem de estados anteriores.
-    * **AÁıes e `dispatch`:** Como definir aÁıes que descrevem o que aconteceu e usar a funÁ„o `dispatch` para envi·-las ao reducer.
-    * **FunÁ„o Reducer:** Uma funÁ„o pura que recebe o estado atual e uma aÁ„o, e retorna um novo estado.
-* **Combinando `useContext` e `useReducer`:** A poderosa combinaÁ„o para gerenciar estados globais complexos de forma organizada e escal·vel, similar ao Redux, mas nativo do React.
-* **PersistÍncia de Estado Simples (ex: `localStorage`):** Como salvar e carregar o estado da aplicaÁ„o (como o carrinho de compras) no armazenamento local do navegador para que os dados n„o sejam perdidos ao recarregar a p·gina.
+    * **Gerenciamento de Estado Mais Complexo:** Quando `useState` se torna insuficiente para estados com l√≥gica de atualiza√ß√£o complexa ou que dependem de estados anteriores.
+    * **A√ß√µes e `dispatch`:** Como definir a√ß√µes que descrevem o que aconteceu e usar a fun√ß√£o `dispatch` para envi√°-las ao reducer.
+    * **Fun√ß√£o Reducer:** Uma fun√ß√£o pura que recebe o estado atual e uma a√ß√£o, e retorna um novo estado.
+* **Combinando `useContext` e `useReducer`:** A poderosa combina√ß√£o para gerenciar estados globais complexos de forma organizada e escal√°vel, similar ao Redux, mas nativo do React.
+* **Persist√™ncia de Estado Simples (ex: `localStorage`):** Como salvar e carregar o estado da aplica√ß√£o (como o carrinho de compras) no armazenamento local do navegador para que os dados n√£o sejam perdidos ao recarregar a p√°gina.
 
-### Materiais de ReferÍncia
+### Materiais de Refer√™ncia
 
-* **DocumentaÁ„o Oficial do React - Context:** [pt-br.reactjs.org/docs/context.html]
-* **DocumentaÁ„o Oficial do React - useReducer:** [pt-br.reactjs.org/docs/hooks-reference.html#usereducer]
+* **Documenta√ß√£o Oficial do React - Context:** [pt-br.reactjs.org/docs/context.html]
+* **Documenta√ß√£o Oficial do React - useReducer:** [pt-br.reactjs.org/docs/hooks-reference.html#usereducer]
 * **Guia Completo Context API + useReducer:** [www.freecodecamp.org/news/react-context-api-with-usereducer-hook/]
 
-### Atividade Pr·tica: Carrinho de Compras com Context API e useReducer
+### Atividade Pr√°tica: Carrinho de Compras com Context API e useReducer
 
-**Objetivo:** Implementar um carrinho de compras funcional para a Pizzaria Digital, utilizando a Context API e o hook `useReducer` para gerenciar o estado global dos itens no carrinho, com persistÍncia de dados no `localStorage`.
+**Objetivo:** Implementar um carrinho de compras funcional para a Pizzaria Digital, utilizando a Context API e o hook `useReducer` para gerenciar o estado global dos itens no carrinho, com persist√™ncia de dados no `localStorage`.
 
-**Roteiro Detalhado para VÌdeo e LaboratÛrio:**
+**Roteiro Detalhado para V√≠deo e Laborat√≥rio:**
 
-#### **Passo 1: CriaÁ„o do Contexto e Reducer do Carrinho**
+#### **Passo 1: Cria√ß√£o do Contexto e Reducer do Carrinho**
 
-Vamos criar a estrutura para o nosso carrinho de compras, incluindo o contexto e a lÛgica de como o estado do carrinho ser· atualizado.
+Vamos criar a estrutura para o nosso carrinho de compras, incluindo o contexto e a l√≥gica de como o estado do carrinho ser√° atualizado.
 
-1. **Criar Pasta `src/context`:** Se ainda n„o existir, crie a pasta `src/context`.
-2. **Criar `src/context/CartContext.jsx`:** Este arquivo conter· o contexto, o reducer e o provider.
+1. **Criar Pasta `src/context`:** Se ainda n√£o existir, crie a pasta `src/context`.
+2. **Criar `src/context/CartContext.jsx`:** Este arquivo conter√° o contexto, o reducer e o provider.
     ```jsx
     // src/context/CartContext.jsx
     import React, { createContext, useReducer, useEffect, useContext } from 'react';
@@ -585,7 +585,7 @@ Vamos criar a estrutura para o nosso carrinho de compras, incluindo o contexto e
       total: 0,
     };
     
-    // 2. Definir a funÁ„o reducer
+    // 2. Definir a fun√ß√£o reducer
     const cartReducer = (state, action) => {
       switch (action.type) {
         case 'ADD_ITEM':
@@ -595,7 +595,7 @@ Vamos criar a estrutura para o nosso carrinho de compras, incluindo o contexto e
             );
     
             if (existingItemIndex > -1) {
-              // Item j· existe, aumentar quantidade
+              // Item j√° existe, aumentar quantidade
               const updatedItems = [...state.items];
               const existingItem = updatedItems[existingItemIndex];
               const updatedItem = {
@@ -625,7 +625,7 @@ Vamos criar a estrutura para o nosso carrinho de compras, incluindo o contexto e
             );
     
             if (existingItemIndex === -1) {
-              return state; // Item n„o encontrado
+              return state; // Item n√£o encontrado
             }
     
             const existingItem = state.items[existingItemIndex];
@@ -668,7 +668,7 @@ Vamos criar a estrutura para o nosso carrinho de compras, incluindo o contexto e
     
     // 4. Criar o Provider
     export const CartProvider = ({ children }) => {
-      // Carregar estado do localStorage na inicializaÁ„o
+      // Carregar estado do localStorage na inicializa√ß√£o
       const storedCart = JSON.parse(localStorage.getItem('cart')) || initialState;
       const [cartState, dispatch] = useReducer(cartReducer, storedCart);
     
@@ -690,17 +690,17 @@ Vamos criar a estrutura para o nosso carrinho de compras, incluindo o contexto e
     };
     ```
     
-    * **ExplicaÁ„o:**
+    * **Explica√ß√£o:**
         * `initialState`: Define a estrutura inicial do nosso carrinho (uma lista de itens e o total).
-        * `cartReducer`: … a funÁ„o central que decide como o estado do carrinho muda em resposta a diferentes `actions` (`ADD_ITEM`, `REMOVE_ITEM`, `CLEAR_CART`).
+        * `cartReducer`: √â a fun√ß√£o central que decide como o estado do carrinho muda em resposta a diferentes `actions` (`ADD_ITEM`, `REMOVE_ITEM`, `CLEAR_CART`).
         * `CartContext`: O objeto de contexto criado.
-        * `CartProvider`: Um componente que envolve a aplicaÁ„o e fornece o `cartState` e a funÁ„o `dispatch` para todos os componentes filhos. Ele tambÈm lida com a persistÍncia no `localStorage` usando `useEffect`.
+        * `CartProvider`: Um componente que envolve a aplica√ß√£o e fornece o `cartState` e a fun√ß√£o `dispatch` para todos os componentes filhos. Ele tamb√©m lida com a persist√™ncia no `localStorage` usando `useEffect`.
         * `useCart`: Um hook customizado para simplificar o consumo do contexto.
     * Salve o arquivo.
 
-#### **Passo 2: Integrar o `CartProvider` na AplicaÁ„o**
+#### **Passo 2: Integrar o `CartProvider` na Aplica√ß√£o**
 
-Para que o carrinho esteja disponÌvel em toda a aplicaÁ„o, precisamos envolver o `App` com o `CartProvider`.
+Para que o carrinho esteja dispon√≠vel em toda a aplica√ß√£o, precisamos envolver o `App` com o `CartProvider`.
 
 1. **Modificar `src/main.jsx`:**
     * Importe `CartProvider` e envolva o `<App />` com ele (dentro do `BrowserRouter`):
@@ -728,7 +728,7 @@ Para que o carrinho esteja disponÌvel em toda a aplicaÁ„o, precisamos envolver o
 
 #### **Passo 3: Criar Componente `PizzaCard` e Consumir o Contexto**
 
-Vamos criar um componente para exibir cada pizza e um bot„o para adicion·-la ao carrinho.
+Vamos criar um componente para exibir cada pizza e um bot√£o para adicion√°-la ao carrinho.
 
 1. **Criar `src/components/PizzaCard.jsx`:**
     ```jsx
@@ -738,7 +738,7 @@ Vamos criar um componente para exibir cada pizza e um bot„o para adicion·-la ao 
     import { useCart } from '../context/CartContext'; // Importar o hook useCart
     
     function PizzaCard({ pizza }) {
-      const { dispatch } = useCart(); // Obter a funÁ„o dispatch do contexto
+      const { dispatch } = useCart(); // Obter a fun√ß√£o dispatch do contexto
     
       const handleAddToCart = () => {
         dispatch({ type: 'ADD_ITEM', payload: pizza });
@@ -764,12 +764,12 @@ Vamos criar um componente para exibir cada pizza e um bot„o para adicion·-la ao 
     export default PizzaCard;
     ```
     
-    * **ExplicaÁ„o:** O componente `PizzaCard` recebe um objeto `pizza` via props. Ele usa o `useCart` para acessar a funÁ„o `dispatch` e, ao clicar no bot„o, despacha uma aÁ„o `ADD_ITEM` com os dados da pizza.
+    * **Explica√ß√£o:** O componente `PizzaCard` recebe um objeto `pizza` via props. Ele usa o `useCart` para acessar a fun√ß√£o `dispatch` e, ao clicar no bot√£o, despacha uma a√ß√£o `ADD_ITEM` com os dados da pizza.
     * Salve o arquivo.
 
-#### **Passo 4: Exibir o Card·pio e Adicionar Pizzas**
+#### **Passo 4: Exibir o Card√°pio e Adicionar Pizzas**
 
-Vamos simular algumas pizzas e exibi-las na p·gina de card·pio, permitindo que sejam adicionadas ao carrinho.
+Vamos simular algumas pizzas e exibi-las na p√°gina de card√°pio, permitindo que sejam adicionadas ao carrinho.
 
 1. **Modificar `src/pages/CardapioPage.jsx`:**
     * Remova os dados `pizzas` simulados diretamente no arquivo.
@@ -787,7 +787,7 @@ Vamos simular algumas pizzas e exibi-las na p·gina de card·pio, permitindo que s
           {
             id: 'p1',
             name: 'Pizza Margherita',
-            description: 'Molho de tomate, mussarela e manjeric„o.',
+            description: 'Molho de tomate, mussarela e manjeric√£o.',
             price: 45.00,
             image: 'https://via.placeholder.com/150/FF0000/FFFFFF?text=Margherita'
           },
@@ -810,7 +810,7 @@ Vamos simular algumas pizzas e exibi-las na p·gina de card·pio, permitindo que s
         function CardapioPage() {
           return (
             <div>
-              <h1>Nosso Card·pio</h1>
+              <h1>Nosso Card√°pio</h1>
               <p>Escolha suas pizzas favoritas!</p>
               <Row>
                 {pizzas.map((pizza) => (
@@ -829,11 +829,11 @@ Vamos simular algumas pizzas e exibi-las na p·gina de card·pio, permitindo que s
 
 #### **Passo 5: Exibir e Gerenciar o Carrinho de Compras**
 
-Agora, vamos exibir os itens no carrinho e permitir que o usu·rio remova ou limpe o carrinho.
+Agora, vamos exibir os itens no carrinho e permitir que o usu√°rio remova ou limpe o carrinho.
 
 1. **Modificar `src/pages/CarrinhoPage.jsx`:**
     * Importe `useCart`, `ListGroup`, `Button`, `Row`, `Col`.
-    * Exiba os itens do `cartState`, com botıes para remover e limpar.
+    * Exiba os itens do `cartState`, com bot√µes para remover e limpar.
         ```jsx
         // src/pages/CarrinhoPage.jsx
         import React from 'react';
@@ -856,7 +856,7 @@ Agora, vamos exibir os itens no carrinho e permitir que o usu·rio remova ou limp
             <div>
               <h1>Seu Carrinho de Compras</h1>
               {cartState.items.length === 0 ? (
-                <p>Seu carrinho est· vazio.</p>
+                <p>Seu carrinho est√° vazio.</p>
               ) : (
                 <>
                   <ListGroup>
@@ -897,7 +897,7 @@ Agora, vamos exibir os itens no carrinho e permitir que o usu·rio remova ou limp
 
 #### **Passo 6: Adicionar Contador de Itens no Header (Opcional, mas recomendado)**
 
-Para melhorar a experiÍncia do usu·rio, vamos exibir o n˙mero de itens no carrinho na Navbar.
+Para melhorar a experi√™ncia do usu√°rio, vamos exibir o n√∫mero de itens no carrinho na Navbar.
 
 1. **Modificar `src/components/Header.jsx`:**
     * Importe `useCart` e `Badge` do React-Bootstrap.
@@ -921,7 +921,7 @@ Para melhorar a experiÍncia do usu·rio, vamos exibir o n˙mero de itens no carrin
                 <Navbar.Collapse id="basic-navbar-nav">
                   <Nav className="me-auto">
                     <NavLink as={Link} to="/" className="nav-link">Home</NavLink>
-                    <NavLink as={Link} to="/cardapio" className="nav-link">Card·pio</NavLink>
+                    <NavLink as={Link} to="/cardapio" className="nav-link">Card√°pio</NavLink>
                     <NavLink as={Link} to="/carrinho" className="nav-link">
                       Carrinho <Badge bg="secondary">{totalItems}</Badge> {/* Exibir total de itens */}
                     </NavLink>
@@ -937,13 +937,302 @@ Para melhorar a experiÍncia do usu·rio, vamos exibir o n˙mero de itens no carrin
         ```
     * Salve o arquivo.
 
-#### **Passo 7: VerificaÁ„o e Encerramento da Quinzena 3**
+#### **Passo 7: Verifica√ß√£o e Encerramento da Quinzena 3**
 
 1. **Testar o Carrinho:**
-    * No navegador, v· para a p·gina de Card·pio (`/cardapio`). Observe o spinner de carregamento e a lista de pizzas.
-    * Clique em "Adicionar ao Carrinho" em algumas pizzas. Observe o contador no `Header` e os itens na p·gina do Carrinho (`/carrinho`).
+    * No navegador, v√° para a p√°gina de Card√°pio (`/cardapio`). Observe o spinner de carregamento e a lista de pizzas.
+    * Clique em "Adicionar ao Carrinho" em algumas pizzas. Observe o contador no `Header` e os itens na p√°gina do Carrinho (`/carrinho`).
     * Tente remover itens e limpar o carrinho.
-    * Recarregue a p·gina (F5) e verifique se os itens do carrinho persistem (graÁas ao `localStorage`).
-2. **Revis„o:** Verifique o console do navegador para quaisquer erros ou avisos.
-3. **Encerramento do VÌdeo/LaboratÛrio:** Resuma como a Context API e o `useReducer` foram usados para gerenciar o estado global do carrinho, e como o `localStorage` garante a persistÍncia dos dados. Mencione que na prÛxima quinzena ser„o abordadas as requisiÁıes HTTP com Axios.
+    * Recarregue a p√°gina (F5) e verifique se os itens do carrinho persistem (gra√ßas ao `localStorage`).
+2. **Revis√£o:** Verifique o console do navegador para quaisquer erros ou avisos.
+3. **Encerramento do V√≠deo/Laborat√≥rio:** Resuma como a Context API e o `useReducer` foram usados para gerenciar o estado global do carrinho, e como o `localStorage` garante a persist√™ncia dos dados. Mencione que na pr√≥xima quinzena ser√£o abordadas as requisi√ß√µes HTTP com Axios.
 
+## Quinzena 4 (Maio) - Requisi√ß√µes HTTP com Axios e Hooks Customizados
+
+### Conte√∫do
+
+Esta quinzena focar√° na comunica√ß√£o da aplica√ß√£o React com um backend, utilizando a biblioteca Axios para realizar requisi√ß√µes HTTP e criando hooks customizados para encapsular a l√≥gica de acesso a dados.
+
+*   **Introdu√ß√£o a Requisi√ß√µes HTTP em React:**
+    *   **`fetch` API nativa:** Breve revis√£o da API `fetch` do navegador.
+    *   **Axios:** Apresenta√ß√£o do Axios como uma alternativa popular e mais robusta ao `fetch`.
+    *   **Vantagens do Axios:** Interceptores de requisi√ß√£o/resposta, tratamento autom√°tico de JSON, cancelamento de requisi√ß√µes, API mais amig√°vel.
+*   **Instala√ß√£o e Configura√ß√£o do Axios:** Como adicionar o Axios ao projeto e realizar configura√ß√µes b√°sicas (ex: `baseURL`).
+*   **Realizando Requisi√ß√µes CRUD (GET, POST, PUT, DELETE):** Exemplos pr√°ticos de como usar o Axios para interagir com uma API RESTful.
+*   **Tratamento de Erros e Estados de Carregamento:** Como exibir mensagens de carregamento (`loading`) e de erro (`error`) para o usu√°rio durante as requisi√ß√µes ass√≠ncronas.
+*   **Cria√ß√£o de Hooks Customizados para API (`useFetch`, `useAxios`):**
+    *   **Motiva√ß√£o:** Abstrair a l√≥gica repetitiva de requisi√ß√µes HTTP (estados de loading, error, data) em um hook reutiliz√°vel.
+    *   **Implementa√ß√£o:** Como criar um hook que encapsula `useState`, `useEffect` e as chamadas Axios.
+*   **Integra√ß√£o com o Backend (Simulado ou Real):** Utiliza√ß√£o de uma API simulada (ex: JSON Server ou mock de dados) para testar as requisi√ß√µes, ou integra√ß√£o com um backend real se dispon√≠vel.
+
+### Materiais de Refer√™ncia
+
+*   **Documenta√ß√£o Oficial do Axios:** [axios-http.com/docs/intro]
+*   **Documenta√ß√£o React - Reusing Logic with Custom Hooks:** [react.dev/learn/reusing-logic-with-custom-hooks]
+*   **Tutorial: Como usar Axios com React:** [www.freecodecamp.org/news/how-to-use-axios-with-react/]
+
+### Atividade Pr√°tica: Listagem de Pizzas e Detalhes com Axios e Hook Customizado
+
+**Objetivo:** Buscar a lista de pizzas e os detalhes de uma pizza espec√≠fica de uma API (simulada com dados est√°ticos por enquanto) usando Axios e um hook customizado, exibindo estados de carregamento e erro.
+
+**Roteiro Detalhado para V√≠deo e Laborat√≥rio:**
+
+#### **Passo 1: Instala√ß√£o do Axios**
+
+1.  **Abrir o Terminal:** Certifique-se de estar na pasta raiz do seu projeto `my-pizzaria-app`.
+2.  **Instalar a Biblioteca:**
+    ```bash
+    npm install axios
+    ```
+    *   Este comando adiciona o Axios √†s depend√™ncias do seu projeto.
+
+#### **Passo 2: Criar um Hook Customizado para Requisi√ß√µes de API (`useApi`)**
+
+Vamos criar um hook gen√©rico que pode ser usado para qualquer requisi√ß√£o GET, gerenciando os estados de carregamento, erro e dados.
+
+1.  **Criar Pasta `src/hooks`:** Se ainda n√£o existir, crie a pasta `src/hooks`.
+2.  **Criar `src/hooks/useApi.js`:**
+    ```jsx
+    // src/hooks/useApi.js
+    import { useState, useEffect } from 'react';
+    import axios from 'axios';
+
+    const useApi = (url) => {
+      const [data, setData] = useState(null);
+      const [loading, setLoading] = useState(true);
+      const [error, setError] = useState(null);
+
+      useEffect(() => {
+        const fetchData = async () => {
+          try {
+            setLoading(true);
+            const response = await axios.get(url);
+            setData(response.data);
+          } catch (err) {
+            setError(err);
+          } finally {
+            setLoading(false);
+          }
+        };
+
+        fetchData();
+      }, [url]); // O efeito √© re-executado se a URL mudar
+
+      return { data, loading, error };
+    };
+
+    export default useApi;
+    ```
+    *   **Explica√ß√£o:**
+        *   O hook `useApi` recebe uma `url` como par√¢metro.
+        *   Ele usa `useState` para gerenciar `data`, `loading` e `error`.
+        *   `useEffect` √© usado para disparar a requisi√ß√£o Axios quando o componente que usa o hook √© montado ou quando a `url` muda.
+        *   A fun√ß√£o `fetchData` √© ass√≠ncrona, usando `try-catch-finally` para lidar com sucesso, erro e estado de carregamento.
+    *   Salve o arquivo.
+
+#### **Passo 3: Simular Dados da API (Tempor√°rio)**
+
+Para testar nosso hook, vamos criar um arquivo com dados de pizzas que nosso hook `useApi` ir√° "buscar". Em um projeto real, esses dados viriam de um backend.
+
+1.  **Criar `src/data/pizzas.js`:**
+    *   Crie a pasta `src/data`.
+    *   Adicione o seguinte conte√∫do:
+        ```jsx
+        // src/data/pizzas.js
+        const pizzasData = [
+          {
+            id: 'p1',
+            name: 'Pizza Margherita',
+            description: 'Molho de tomate fresco, mussarela de b√∫fala e manjeric√£o.',
+            price: 45.00,
+            image: 'https://via.placeholder.com/150/FF0000/FFFFFF?text=Margherita'
+          },
+          {
+            id: 'p2',
+            name: 'Pizza Calabresa',
+            description: 'Molho de tomate, mussarela, calabresa fatiada e cebola roxa.',
+            price: 50.00,
+            image: 'https://via.placeholder.com/150/0000FF/FFFFFF?text=Calabresa'
+          },
+          {
+            id: 'p3',
+            name: 'Pizza Frango com Catupiry',
+            description: 'Molho de tomate, mussarela, frango desfiado temperado e catupiry original.',
+            price: 55.00,
+            image: 'https://via.placeholder.com/150/00FF00/FFFFFF?text=Frango'
+          },
+          {
+            id: 'p4',
+            name: 'Pizza Quatro Queijos',
+            description: 'Mussarela, provolone, parmes√£o e gorgonzola.',
+            price: 60.00,
+            image: 'https://via.placeholder.com/150/FFFF00/000000?text=4Queijos'
+          },
+          {
+            id: 'p5',
+            name: 'Pizza Portuguesa',
+            description: 'Molho de tomate, mussarela, presunto, ovos, cebola e azeitonas.',
+            price: 58.00,
+            image: 'https://via.placeholder.com/150/FF00FF/FFFFFF?text=Portuguesa'
+          },
+        ];
+
+        export default pizzasData;
+        ```
+    *   Salve o arquivo.
+
+#### **Passo 4: Integrar `useApi` no `CardapioPage.jsx` para Listar Pizzas**
+
+Vamos usar nosso novo hook para buscar e exibir a lista de pizzas.
+
+1.  **Modificar `src/pages/CardapioPage.jsx`:**
+    *   Remova os dados `pizzas` simulados diretamente no arquivo.
+    *   Importe `useApi` e `pizzasData` (para simular a API).
+    *   Use `useApi` para buscar os dados e renderize condicionalmente.
+        ```jsx
+        // src/pages/CardapioPage.jsx
+        import React from 'react';
+        import { Row, Col, Spinner, Alert } from 'react-bootstrap'; // Importar Spinner e Alert
+        import PizzaCard from '../components/PizzaCard';
+        import useApi from '../hooks/useApi'; // Importar o hook customizado
+        import pizzasData from '../data/pizzas'; // Importar dados simulados
+
+        function CardapioPage() {
+          // Simular a URL da API. Em um backend real, seria algo como '/api/pizzas'
+          // Por enquanto, vamos usar os dados locais como se viessem de uma API
+          // const { data: pizzas, loading, error } = useApi('/api/pizzas'); // Para API real
+
+          // Para simular, vamos apenas usar os dados locais e simular loading/error
+          const [pizzas, setPizzas] = React.useState([]);
+          const [loading, setLoading] = React.useState(true);
+          const [error, setError] = React.useState(null);
+
+          React.useEffect(() => {
+            // Simular um atraso de rede
+            setTimeout(() => {
+              try {
+                setPizzas(pizzasData);
+                setLoading(false);
+              } catch (err) {
+                setError('Erro ao carregar as pizzas.');
+                setLoading(false);
+              }
+            }, 1000); // Atraso de 1 segundo
+          }, []);
+
+          if (loading) {
+            return (
+              <div className="text-center mt-5">
+                <Spinner animation="border" role="status">
+                  <span className="visually-hidden">Carregando...</span>
+                </Spinner>
+                <p>Carregando card√°pio...</p>
+              </div>
+            );
+          }
+
+          if (error) {
+            return <Alert variant="danger">Erro: {error}</Alert>;
+          }
+
+          return (
+            <div>
+              <h1>Nosso Card√°pio</h1>
+              <p>Escolha suas pizzas favoritas!</p>
+              <Row>
+                {pizzas.map((pizza) => (
+                  <Col key={pizza.id} sm={12} md={6} lg={4}>
+                    <PizzaCard pizza={pizza} />
+                  </Col>
+                ))}
+              </Row>
+            </div>
+          );
+        }
+
+        export default CardapioPage;
+        ```
+    *   **Observa√ß√£o:** Para esta quinzena, o `useApi` foi demonstrado, mas para simplificar a simula√ß√£o de dados e o `loading`/`error` sem um backend real, usei `useState` e `useEffect` diretamente no `CardapioPage`. Se houvesse um backend real, o `useApi('/api/pizzas')` seria a forma correta.
+    *   Salve o arquivo.
+
+#### **Passo 5: Integrar `useApi` no `DetalhePizzaPage.jsx` para Exibir Detalhes**
+
+Vamos usar o hook para buscar os detalhes de uma pizza espec√≠fica.
+
+1.  **Modificar `src/pages/DetalhePizzaPage.jsx`:**
+    *   Importe `useParams`, `Spinner`, `Alert` e `pizzasData`.
+    *   Use `useApi` (simulado) para buscar a pizza pelo ID.
+        ```jsx
+        // src/pages/DetalhePizzaPage.jsx
+        import React from 'react';
+        import { useParams } from 'react-router-dom';
+        import { Spinner, Alert, Card, Button } from 'react-bootstrap';
+        import pizzasData from '../data/pizzas'; // Importar dados simulados
+
+        function DetalhePizzaPage() {
+          const { id } = useParams();
+          const [pizza, setPizza] = React.useState(null);
+          const [loading, setLoading] = React.useState(true);
+          const [error, setError] = React.useState(null);
+
+          React.useEffect(() => {
+            setTimeout(() => {
+              try {
+                const foundPizza = pizzasData.find(p => p.id === id);
+                if (foundPizza) {
+                  setPizza(foundPizza);
+                } else {
+                  setError('Pizza n√£o encontrada.');
+                }
+                setLoading(false);
+              } catch (err) {
+                setError('Erro ao carregar detalhes da pizza.');
+                setLoading(false);
+              }
+            }, 500); // Atraso de 0.5 segundo
+          }, [id]);
+
+          if (loading) {
+            return (
+              <div className="text-center mt-5">
+                <Spinner animation="border" role="status">
+                  <span className="visually-hidden">Carregando...</span>
+                </Spinner>
+                <p>Carregando detalhes da pizza...</p>
+              </div>
+            );
+          }
+
+          if (error) {
+            return <Alert variant="danger">Erro: {error}</Alert>;
+          }
+
+          if (!pizza) {
+            return <Alert variant="info">Nenhuma pizza encontrada com este ID.</Alert>;
+          }
+
+          return (
+            <Card className="mt-4">
+              <Card.Img variant="top" src={pizza.image} alt={pizza.name} style={{ maxHeight: '300px', objectFit: 'cover' }} />
+              <Card.Body>
+                <Card.Title as="h1">{pizza.name}</Card.Title>
+                <Card.Text>{pizza.description}</Card.Text>
+                <h4>Pre√ßo: R$ {pizza.price.toFixed(2)}</h4>
+                <Button variant="primary">Adicionar ao Carrinho</Button> {/* Funcionalidade a ser implementada */}
+              </Card.Body>
+            </Card>
+          );
+        }
+
+        export default DetalhePizzaPage;
+        ```
+    *   **Observa√ß√£o:** Similar ao `CardapioPage`, a simula√ß√£o de `useApi` √© feita diretamente com `useState` e `useEffect` para usar os dados locais. Em um cen√°rio real, o `useApi` seria usado com a URL da API real.
+    *   Salve o arquivo.
+
+#### **Passo 6: Verifica√ß√£o e Encerramento da Quinzena 4**
+
+1.  **Testar Listagem e Detalhes:**
+    *   No navegador, v√° para a p√°gina de Card√°pio (`/cardapio`). Observe o spinner de carregamento e a lista de pizzas.
+    *   Clique em uma pizza (ou navegue para `/pizza/p1`, `/pizza/p2`, etc.) e veja os detalhes. Tente um ID inexistente (ex: `/pizza/p99`) para ver a mensagem de erro.
+2.  **Revis√£o:** Verifique o console do navegador para quaisquer erros ou avisos.
+3.  **Encerramento do V√≠deo/Laborat√≥rio:** Resuma a import√¢ncia do Axios para requisi√ß√µes HTTP e como hooks customizados como `useApi` ajudam a organizar e reutilizar a l√≥gica de acesso a dados, incluindo o tratamento de estados de carregamento e erro. Mencione que na pr√≥xima quinzena ser√£o abordados os formul√°rios com React Hook Form.
