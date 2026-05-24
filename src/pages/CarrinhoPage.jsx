@@ -2,6 +2,7 @@
 import React from "react";
 import {useCart} from '../context/CartContext'
 import {ListGroup, Button, Row, Col} from 'react-bootstrap'
+import PedidoForm from '../components/PedidoForm'
 
 function CarrinhoPage() {
   const {cartState, dispatch} = useCart();
@@ -20,7 +21,7 @@ function CarrinhoPage() {
       <h1>Seu Carrinho de Compras</h1>
       {
         cartState.items.length === 0 ?
-        (<p>Seu carrinho está vazio.</p>)
+        (<p>Seu carrinho está vazio. Adicione algumas pizzas do <a href="/cardapio">cardápio</a>!</p>)
         : (
           <>
             <ListGroup>
@@ -45,8 +46,9 @@ function CarrinhoPage() {
             <Button variant="warning" onClick={handleClearCart} className="mt-3 ms-2">
               Limpar Carrinho
             </Button>
-            <Button variant="success" className="mt-3 ms-2">
-              Finalizar Pedido
+            <Button>
+              <hr className="my-4" />
+              <PedidoForm /> {/* Adiciona o formulário de pedido abaixo do carrinho */  }
             </Button>
           </>
         )

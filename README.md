@@ -536,8 +536,6 @@ Vamos simular um login e usar `useNavigate` para redirecionar o usuário.
 
 ---
 
-
-
 ## Quinzena 3 (Março) - Gerenciamento de Estado com Context API e Reducers
 
 ### Conteúdo
@@ -546,14 +544,14 @@ Esta quinzena aprofundará no gerenciamento de estado em aplicações React, foc
 
 * **Revisão de `useState` e `useEffect`:** Reforço sobre como esses hooks gerenciam o estado local de um componente e lidam com efeitos colaterais, respectivamente.
 * **Introdução à Context API:**
-    * **Problema do Prop Drilling:** Explicação do cenário onde props precisam ser passadas por muitos níveis de componentes, tornando o código verboso e difícil de manter.
-    * **Criação de Contexto:** Como criar um contexto para armazenar dados que precisam ser acessados por múltiplos componentes na árvore.
-    * **`Context.Provider`:** O componente que fornece o valor do contexto para todos os seus descendentes.
-    * **`useContext`:** O hook que permite aos componentes filhos consumir o valor de um contexto, eliminando a necessidade de `Context.Consumer`.
+  * **Problema do Prop Drilling:** Explicação do cenário onde props precisam ser passadas por muitos níveis de componentes, tornando o código verboso e difícil de manter.
+  * **Criação de Contexto:** Como criar um contexto para armazenar dados que precisam ser acessados por múltiplos componentes na árvore.
+  * **`Context.Provider`:** O componente que fornece o valor do contexto para todos os seus descendentes.
+  * **`useContext`:** O hook que permite aos componentes filhos consumir o valor de um contexto, eliminando a necessidade de `Context.Consumer`.
 * **`useReducer`:**
-    * **Gerenciamento de Estado Mais Complexo:** Quando `useState` se torna insuficiente para estados com lógica de atualização complexa ou que dependem de estados anteriores.
-    * **Ações e `dispatch`:** Como definir ações que descrevem o que aconteceu e usar a função `dispatch` para enviá-las ao reducer.
-    * **Função Reducer:** Uma função pura que recebe o estado atual e uma ação, e retorna um novo estado.
+  * **Gerenciamento de Estado Mais Complexo:** Quando `useState` se torna insuficiente para estados com lógica de atualização complexa ou que dependem de estados anteriores.
+  * **Ações e `dispatch`:** Como definir ações que descrevem o que aconteceu e usar a função `dispatch` para enviá-las ao reducer.
+  * **Função Reducer:** Uma função pura que recebe o estado atual e uma ação, e retorna um novo estado.
 * **Combinando `useContext` e `useReducer`:** A poderosa combinação para gerenciar estados globais complexos de forma organizada e escalável, similar ao Redux, mas nativo do React.
 * **Persistência de Estado Simples (ex: `localStorage`):** Como salvar e carregar o estado da aplicação (como o carrinho de compras) no armazenamento local do navegador para que os dados não sejam perdidos ao recarregar a página.
 
@@ -575,288 +573,857 @@ Vamos criar a estrutura para o nosso carrinho de compras, incluindo o contexto e
 
 1. **Criar Pasta `src/context`:** Se ainda não existir, crie a pasta `src/context`.
 2. **Criar `src/context/CartContext.jsx`:** Este arquivo conterá o contexto, o reducer e o provider.
-    ```jsx
-    // src/context/CartContext.jsx
-    import React, { createContext, useReducer, useEffect, useContext } from 'react';
-    
-    // 1. Definir o estado inicial do carrinho
-    const initialState = {
-      items: [],
-      total: 0,
-    };
-    
-    // 2. Definir a função reducer
-    const cartReducer = (state, action) => {
-      switch (action.type) {
-        case 'ADD_ITEM':
-          {
-            const existingItemIndex = state.items.findIndex(
-              (item) => item.id === action.payload.id
-            );
-    
-            if (existingItemIndex > -1) {
-              // Item já existe, aumentar quantidade
-              const updatedItems = [...state.items];
-              const existingItem = updatedItems[existingItemIndex];
-              const updatedItem = {
-                ...existingItem,
-                quantity: existingItem.quantity + 1,
-              };
-              updatedItems[existingItemIndex] = updatedItem;
-              return {
-                ...state,
-                items: updatedItems,
-                total: state.total + action.payload.price,
-              };
-            } else {
-              // Novo item, adicionar ao carrinho
-              const newItem = { ...action.payload, quantity: 1 };
-              return {
-                ...state,
-                items: [...state.items, newItem],
-                total: state.total + newItem.price,
-              };
-            }
-          }
-        case 'REMOVE_ITEM':
-          {
-            const existingItemIndex = state.items.findIndex(
-              (item) => item.id === action.payload.id
-            );
-    
-            if (existingItemIndex === -1) {
-              return state; // Item não encontrado
-            }
-    
-            const existingItem = state.items[existingItemIndex];
-            const updatedTotal = state.total - existingItem.price;
-    
-            if (existingItem.quantity === 1) {
-              // Remover item completamente se a quantidade for 1
-              const updatedItems = state.items.filter(
-                (item) => item.id !== action.payload.id
-              );
-              return {
-                ...state,
-                items: updatedItems,
-                total: updatedTotal,
-              };
-            } else {
-              // Diminuir quantidade do item
-              const updatedItems = [...state.items];
-              const updatedItem = {
-                ...existingItem,
-                quantity: existingItem.quantity - 1,
-              };
-              updatedItems[existingItemIndex] = updatedItem;
-              return {
-                ...state,
-                items: updatedItems,
-                total: updatedTotal,
-              };
-            }
-          }
-        case 'CLEAR_CART':
-          return initialState; // Limpar o carrinho, voltando ao estado inicial
-        default:
-          return state;
-      }
-    };
-    
-    // 3. Criar o Contexto
-    export const CartContext = createContext(initialState);
-    
-    // 4. Criar o Provider
-    export const CartProvider = ({ children }) => {
-      // Carregar estado do localStorage na inicialização
-      const storedCart = JSON.parse(localStorage.getItem('cart')) || initialState;
-      const [cartState, dispatch] = useReducer(cartReducer, storedCart);
-    
-      // Salvar estado no localStorage sempre que o carrinho mudar
-      useEffect(() => {
-        localStorage.setItem('cart', JSON.stringify(cartState));
-      }, [cartState]);
-    
-      return (
-        <CartContext.Provider value={{ cartState, dispatch }}>
-          {children}
-        </CartContext.Provider>
-      );
-    };
-    
-    // 5. Hook customizado para facilitar o uso do contexto
-    export const useCart = () => {
-      return useContext(CartContext);
-    };
-    ```
-    
-    * **Explicação:**
-        * `initialState`: Define a estrutura inicial do nosso carrinho (uma lista de itens e o total).
-        * `cartReducer`: É a função central que decide como o estado do carrinho muda em resposta a diferentes `actions` (`ADD_ITEM`, `REMOVE_ITEM`, `CLEAR_CART`).
-        * `CartContext`: O objeto de contexto criado.
-        * `CartProvider`: Um componente que envolve a aplicação e fornece o `cartState` e a função `dispatch` para todos os componentes filhos. Ele também lida com a persistência no `localStorage` usando `useEffect`.
-        * `useCart`: Um hook customizado para simplificar o consumo do contexto.
-    * Salve o arquivo.
+   
+   ```jsx
+   // src/context/CartContext.jsx
+   import React, { createContext, useReducer, useEffect, useContext } from 'react';
+   
+   // 1. Definir o estado inicial do carrinho
+   const initialState = {
+     items: [],
+     total: 0,
+   };
+   
+   // 2. Definir a função reducer
+   const cartReducer = (state, action) => {
+     switch (action.type) {
+       case 'ADD_ITEM':
+         {
+           const existingItemIndex = state.items.findIndex(
+             (item) => item.id === action.payload.id
+           );
+   
+           if (existingItemIndex > -1) {
+             // Item já existe, aumentar quantidade
+             const updatedItems = [...state.items];
+             const existingItem = updatedItems[existingItemIndex];
+             const updatedItem = {
+               ...existingItem,
+               quantity: existingItem.quantity + 1,
+             };
+             updatedItems[existingItemIndex] = updatedItem;
+             return {
+               ...state,
+               items: updatedItems,
+               total: state.total + action.payload.price,
+             };
+           } else {
+             // Novo item, adicionar ao carrinho
+             const newItem = { ...action.payload, quantity: 1 };
+             return {
+               ...state,
+               items: [...state.items, newItem],
+               total: state.total + newItem.price,
+             };
+           }
+         }
+       case 'REMOVE_ITEM':
+         {
+           const existingItemIndex = state.items.findIndex(
+             (item) => item.id === action.payload.id
+           );
+   
+           if (existingItemIndex === -1) {
+             return state; // Item não encontrado
+           }
+   
+           const existingItem = state.items[existingItemIndex];
+           const updatedTotal = state.total - existingItem.price;
+   
+           if (existingItem.quantity === 1) {
+             // Remover item completamente se a quantidade for 1
+             const updatedItems = state.items.filter(
+               (item) => item.id !== action.payload.id
+             );
+             return {
+               ...state,
+               items: updatedItems,
+               total: updatedTotal,
+             };
+           } else {
+             // Diminuir quantidade do item
+             const updatedItems = [...state.items];
+             const updatedItem = {
+               ...existingItem,
+               quantity: existingItem.quantity - 1,
+             };
+             updatedItems[existingItemIndex] = updatedItem;
+             return {
+               ...state,
+               items: updatedItems,
+               total: updatedTotal,
+             };
+           }
+         }
+       case 'CLEAR_CART':
+         return initialState; // Limpar o carrinho, voltando ao estado inicial
+       default:
+         return state;
+     }
+   };
+   
+   // 3. Criar o Contexto
+   export const CartContext = createContext(initialState);
+   
+   // 4. Criar o Provider
+   export const CartProvider = ({ children }) => {
+     // Carregar estado do localStorage na inicialização
+     const storedCart = JSON.parse(localStorage.getItem('cart')) || initialState;
+     const [cartState, dispatch] = useReducer(cartReducer, storedCart);
+   
+     // Salvar estado no localStorage sempre que o carrinho mudar
+     useEffect(() => {
+       localStorage.setItem('cart', JSON.stringify(cartState));
+     }, [cartState]);
+   
+     return (
+       <CartContext.Provider value={{ cartState, dispatch }}>
+         {children}
+       </CartContext.Provider>
+     );
+   };
+   
+   // 5. Hook customizado para facilitar o uso do contexto
+   export const useCart = () => {
+     return useContext(CartContext);
+   };
+   ```
+   
+   * **Explicação:**
+     * `initialState`: Define a estrutura inicial do nosso carrinho (uma lista de itens e o total).
+     * `cartReducer`: É a função central que decide como o estado do carrinho muda em resposta a diferentes `actions` (`ADD_ITEM`, `REMOVE_ITEM`, `CLEAR_CART`).
+     * `CartContext`: O objeto de contexto criado.
+     * `CartProvider`: Um componente que envolve a aplicação e fornece o `cartState` e a função `dispatch` para todos os componentes filhos. Ele também lida com a persistência no `localStorage` usando `useEffect`.
+     * `useCart`: Um hook customizado para simplificar o consumo do contexto.
+   * Salve o arquivo.
 
 #### **Passo 2: Integrar o `CartProvider` na Aplicação**
 
 Para que o carrinho esteja disponível em toda a aplicação, precisamos envolver o `App` com o `CartProvider`.
 
 1. **Modificar `src/main.jsx`:**
-    * Importe `CartProvider` e envolva o `<App />` com ele (dentro do `BrowserRouter`):
-        ```jsx
-        // src/main.jsx
-        import 'bootstrap/dist/css/bootstrap.min.css';
-        import React from 'react';
-        import ReactDOM from 'react-dom/client';
-        import App from './App.jsx';
-        import './index.css';
-        import { BrowserRouter } from 'react-router-dom';
-        import { CartProvider } from './context/CartContext'; // Importar CartProvider
-        
-        ReactDOM.createRoot(document.getElementById('root')).render(
-          <React.StrictMode>
-            <BrowserRouter>
-              <CartProvider> {/* Envolver App com CartProvider */}
-                <App />
-              </CartProvider>
-            </BrowserRouter>
-          </React.StrictMode>,
-        );
-        ```
-    * Salve o arquivo.
+   * Importe `CartProvider` e envolva o `<App />` com ele (dentro do `BrowserRouter`):
+     ```jsx
+     // src/main.jsx
+     import 'bootstrap/dist/css/bootstrap.min.css';
+     import React from 'react';
+     import ReactDOM from 'react-dom/client';
+     import App from './App.jsx';
+     import './index.css';
+     import { BrowserRouter } from 'react-router-dom';
+     import { CartProvider } from './context/CartContext'; // Importar CartProvider
+     
+     ReactDOM.createRoot(document.getElementById('root')).render(
+       <React.StrictMode>
+         <BrowserRouter>
+           <CartProvider> {/* Envolver App com CartProvider */}
+             <App />
+           </CartProvider>
+         </BrowserRouter>
+       </React.StrictMode>,
+     );
+     ```
+   * Salve o arquivo.
 
 #### **Passo 3: Criar Componente `PizzaCard` e Consumir o Contexto**
 
 Vamos criar um componente para exibir cada pizza e um botão para adicioná-la ao carrinho.
 
 1. **Criar `src/components/PizzaCard.jsx`:**
-    ```jsx
-    // src/components/PizzaCard.jsx
-    import React from 'react';
-    import { Card, Button } from 'react-bootstrap';
-    import { useCart } from '../context/CartContext'; // Importar o hook useCart
-    
-    function PizzaCard({ pizza }) {
-      const { dispatch } = useCart(); // Obter a função dispatch do contexto
-    
-      const handleAddToCart = () => {
-        dispatch({ type: 'ADD_ITEM', payload: pizza });
-        alert(`${pizza.name} adicionada ao carrinho!`);
-      };
-    
-      return (
-        <Card style={{ width: '18rem', marginBottom: '20px' }}>
-          <Card.Img variant="top" src={pizza.image} alt={pizza.name} />
-          <Card.Body>
-            <Card.Title>{pizza.name}</Card.Title>
-            <Card.Text>
-              {pizza.description}
-              <br />
-              <strong>R$ {pizza.price.toFixed(2)}</strong>
-            </Card.Text>
-            <Button variant="primary" onClick={handleAddToCart}>Adicionar ao Carrinho</Button>
-          </Card.Body>
-        </Card>
-      );
-    }
-    
-    export default PizzaCard;
-    ```
-    
-    * **Explicação:** O componente `PizzaCard` recebe um objeto `pizza` via props. Ele usa o `useCart` para acessar a função `dispatch` e, ao clicar no botão, despacha uma ação `ADD_ITEM` com os dados da pizza.
-    * Salve o arquivo.
+   
+   ```jsx
+   // src/components/PizzaCard.jsx
+   import React from 'react';
+   import { Card, Button } from 'react-bootstrap';
+   import { useCart } from '../context/CartContext'; // Importar o hook useCart
+   
+   function PizzaCard({ pizza }) {
+     const { dispatch } = useCart(); // Obter a função dispatch do contexto
+   
+     const handleAddToCart = () => {
+       dispatch({ type: 'ADD_ITEM', payload: pizza });
+       alert(`${pizza.name} adicionada ao carrinho!`);
+     };
+   
+     return (
+       <Card style={{ width: '18rem', marginBottom: '20px' }}>
+         <Card.Img variant="top" src={pizza.image} alt={pizza.name} />
+         <Card.Body>
+           <Card.Title>{pizza.name}</Card.Title>
+           <Card.Text>
+             {pizza.description}
+             <br />
+             <strong>R$ {pizza.price.toFixed(2)}</strong>
+           </Card.Text>
+           <Button variant="primary" onClick={handleAddToCart}>Adicionar ao Carrinho</Button>
+         </Card.Body>
+       </Card>
+     );
+   }
+   
+   export default PizzaCard;
+   ```
+   
+   * **Explicação:** O componente `PizzaCard` recebe um objeto `pizza` via props. Ele usa o `useCart` para acessar a função `dispatch` e, ao clicar no botão, despacha uma ação `ADD_ITEM` com os dados da pizza.
+   * Salve o arquivo.
 
 #### **Passo 4: Exibir o Cardápio e Adicionar Pizzas**
 
 Vamos simular algumas pizzas e exibi-las na página de cardápio, permitindo que sejam adicionadas ao carrinho.
 
 1. **Modificar `src/pages/CardapioPage.jsx`:**
-    * Remova os dados `pizzas` simulados diretamente no arquivo.
-    * Importe `PizzaCard` e `Row`, `Col` do React-Bootstrap.
-    * Crie um array de pizzas simuladas.
-    * Mapeie as pizzas para renderizar `PizzaCard`s.
-        ```jsx
-        // src/pages/CardapioPage.jsx
-        import React from 'react';
-        import { Row, Col } from 'react-bootstrap';
-        import PizzaCard from '../components/PizzaCard'; // Importar PizzaCard
-        
-        // Dados de pizzas simulados
-        const pizzas = [
-          {
-            id: 'p1',
-            name: 'Pizza Margherita',
-            description: 'Molho de tomate, mussarela e manjericão.',
-            price: 45.00,
-            image: 'https://via.placeholder.com/150/FF0000/FFFFFF?text=Margherita'
-          },
-          {
-            id: 'p2',
-            name: 'Pizza Calabresa',
-            description: 'Molho de tomate, mussarela, calabresa e cebola.',
-            price: 50.00,
-            image: 'https://via.placeholder.com/150/0000FF/FFFFFF?text=Calabresa'
-          },
-          {
-            id: 'p3',
-            name: 'Pizza Frango com Catupiry',
-            description: 'Molho de tomate, mussarela, frango desfiado e catupiry.',
-            price: 55.00,
-            image: 'https://via.placeholder.com/150/00FF00/FFFFFF?text=Frango'
-          },
-        ];
-        
-        function CardapioPage() {
-          return (
-            <div>
-              <h1>Nosso Cardápio</h1>
-              <p>Escolha suas pizzas favoritas!</p>
-              <Row>
-                {pizzas.map((pizza) => (
-                  <Col key={pizza.id} sm={12} md={6} lg={4}>
-                    <PizzaCard pizza={pizza} />
-                  </Col>
-                ))}
-              </Row>
-            </div>
-          );
-        }
-        
-        export default CardapioPage;
-        ```
-    * Salve o arquivo.
+   * Remova os dados `pizzas` simulados diretamente no arquivo.
+   * Importe `PizzaCard` e `Row`, `Col` do React-Bootstrap.
+   * Crie um array de pizzas simuladas.
+   * Mapeie as pizzas para renderizar `PizzaCard`s.
+     ```jsx
+     // src/pages/CardapioPage.jsx
+     import React from 'react';
+     import { Row, Col } from 'react-bootstrap';
+     import PizzaCard from '../components/PizzaCard'; // Importar PizzaCard
+     
+     // Dados de pizzas simulados
+     const pizzas = [
+       {
+         id: 'p1',
+         name: 'Pizza Margherita',
+         description: 'Molho de tomate, mussarela e manjericão.',
+         price: 45.00,
+         image: 'https://via.placeholder.com/150/FF0000/FFFFFF?text=Margherita'
+       },
+       {
+         id: 'p2',
+         name: 'Pizza Calabresa',
+         description: 'Molho de tomate, mussarela, calabresa e cebola.',
+         price: 50.00,
+         image: 'https://via.placeholder.com/150/0000FF/FFFFFF?text=Calabresa'
+       },
+       {
+         id: 'p3',
+         name: 'Pizza Frango com Catupiry',
+         description: 'Molho de tomate, mussarela, frango desfiado e catupiry.',
+         price: 55.00,
+         image: 'https://via.placeholder.com/150/00FF00/FFFFFF?text=Frango'
+       },
+     ];
+     
+     function CardapioPage() {
+       return (
+         <div>
+           <h1>Nosso Cardápio</h1>
+           <p>Escolha suas pizzas favoritas!</p>
+           <Row>
+             {pizzas.map((pizza) => (
+               <Col key={pizza.id} sm={12} md={6} lg={4}>
+                 <PizzaCard pizza={pizza} />
+               </Col>
+             ))}
+           </Row>
+         </div>
+       );
+     }
+     
+     export default CardapioPage;
+     ```
+   * Salve o arquivo.
 
 #### **Passo 5: Exibir e Gerenciar o Carrinho de Compras**
 
 Agora, vamos exibir os itens no carrinho e permitir que o usuário remova ou limpe o carrinho.
 
 1. **Modificar `src/pages/CarrinhoPage.jsx`:**
-    * Importe `useCart`, `ListGroup`, `Button`, `Row`, `Col`.
-    * Exiba os itens do `cartState`, com botões para remover e limpar.
+   * Importe `useCart`, `ListGroup`, `Button`, `Row`, `Col`.
+   * Exiba os itens do `cartState`, com botões para remover e limpar.
+     ```jsx
+     // src/pages/CarrinhoPage.jsx
+     import React from 'react';
+     import { useCart } from '../context/CartContext'; // Importar o hook useCart
+     import { ListGroup, Button, Row, Col } from 'react-bootstrap';
+     
+     function CarrinhoPage() {
+       const { cartState, dispatch } = useCart(); // Obter estado e dispatch
+     
+       const handleRemoveItem = (id) => {
+         dispatch({ type: 'REMOVE_ITEM', payload: { id } });
+       };
+     
+       const handleClearCart = () => {
+         dispatch({ type: 'CLEAR_CART' });
+         alert('Carrinho limpo!');
+       };
+     
+       return (
+         <div>
+           <h1>Seu Carrinho de Compras</h1>
+           {cartState.items.length === 0 ? (
+             <p>Seu carrinho está vazio.</p>
+           ) : (
+             <>
+               <ListGroup>
+                 {cartState.items.map((item) => (
+                   <ListGroup.Item key={item.id}>
+                     <Row className="align-items-center">
+                       <Col xs={6}>{item.name} (x{item.quantity})</Col>
+                       <Col xs={3}>R$ {(item.price * item.quantity).toFixed(2)}</Col>
+                       <Col xs={3} className="text-end">
+                         <Button
+                           variant="danger"
+                           size="sm"
+                           onClick={() => handleRemoveItem(item.id)}
+                         >
+                           Remover
+                         </Button>
+                       </Col>
+                     </Row>
+                   </ListGroup.Item>
+                 ))}
+               </ListGroup>
+               <h3 className="mt-3">Total: R$ {cartState.total.toFixed(2)}</h3>
+               <Button variant="warning" onClick={handleClearCart} className="mt-3">
+                 Limpar Carrinho
+               </Button>
+               <Button variant="success" className="mt-3 ms-2">
+                 Finalizar Pedido
+               </Button>
+             </>
+           )}
+         </div>
+       );
+     }
+     
+     export default CarrinhoPage;
+     ```
+   * Salve o arquivo.
+
+#### **Passo 6: Adicionar Contador de Itens no Header (Opcional, mas recomendado)**
+
+Para melhorar a experiência do usuário, vamos exibir o número de itens no carrinho na Navbar.
+
+1. **Modificar `src/components/Header.jsx`:**
+   * Importe `useCart` e `Badge` do React-Bootstrap.
+   * Adicione um `Badge` ao lado do link do carrinho.
+     ```jsx
+     // src/components/Header.jsx
+     import React from 'react';
+     import { Navbar, Container, Nav, Badge } from 'react-bootstrap'; // Importar Badge
+     import { Link, NavLink } from 'react-router-dom';
+     import { useCart } from '../context/CartContext'; // Importar useCart
+     
+     function Header() {
+       const { cartState } = useCart(); // Obter o estado do carrinho
+       const totalItems = cartState.items.reduce((sum, item) => sum + item.quantity, 0);
+     
+       return (
+         <Navbar bg="dark" variant="dark" expand="lg">
+           <Container>
+             <Navbar.Brand as={Link} to="/">Pizzaria Digital</Navbar.Brand>
+             <Navbar.Toggle aria-controls="basic-navbar-nav" />
+             <Navbar.Collapse id="basic-navbar-nav">
+               <Nav className="me-auto">
+                 <NavLink as={Link} to="/" className="nav-link">Home</NavLink>
+                 <NavLink as={Link} to="/cardapio" className="nav-link">Cardápio</NavLink>
+                 <NavLink as={Link} to="/carrinho" className="nav-link">
+                   Carrinho <Badge bg="secondary">{totalItems}</Badge> {/* Exibir total de itens */}
+                 </NavLink>
+                 <NavLink as={Link} to="/login" className="nav-link">Login</NavLink>
+               </Nav>
+             </Navbar.Collapse>
+           </Container>
+         </Navbar>
+       );
+     }
+     
+     export default Header;
+     ```
+   * Salve o arquivo.
+
+#### **Passo 7: Verificação e Encerramento da Quinzena 3**
+
+1. **Testar o Carrinho:**
+   * No navegador, vá para a página de Cardápio (`/cardapio`). Observe o spinner de carregamento e a lista de pizzas.
+   * Clique em "Adicionar ao Carrinho" em algumas pizzas. Observe o contador no `Header` e os itens na página do Carrinho (`/carrinho`).
+   * Tente remover itens e limpar o carrinho.
+   * Recarregue a página (F5) e verifique se os itens do carrinho persistem (graças ao `localStorage`).
+2. **Revisão:** Verifique o console do navegador para quaisquer erros ou avisos.
+3. **Encerramento do Vídeo/Laboratório:** Resuma como a Context API e o `useReducer` foram usados para gerenciar o estado global do carrinho, e como o `localStorage` garante a persistência dos dados. Mencione que na próxima quinzena serão abordadas as requisições HTTP com Axios.
+
+## Quinzena 4 (Maio) - Requisições HTTP com Axios e Hooks Customizados
+
+### Conteúdo
+
+Esta quinzena focará na comunicação da aplicação React com um backend, utilizando a biblioteca Axios para realizar requisições HTTP e criando hooks customizados para encapsular a lógica de acesso a dados.
+
+* **Introdução a Requisições HTTP em React:**
+  * **`fetch` API nativa:** Breve revisão da API `fetch` do navegador.
+  * **Axios:** Apresentação do Axios como uma alternativa popular e mais robusta ao `fetch`.
+  * **Vantagens do Axios:** Interceptores de requisição/resposta, tratamento automático de JSON, cancelamento de requisições, API mais amigável.
+* **Instalação e Configuração do Axios:** Como adicionar o Axios ao projeto e realizar configurações básicas (ex: `baseURL`).
+* **Realizando Requisições CRUD (GET, POST, PUT, DELETE):** Exemplos práticos de como usar o Axios para interagir com uma API RESTful.
+* **Tratamento de Erros e Estados de Carregamento:** Como exibir mensagens de carregamento (`loading`) e de erro (`error`) para o usuário durante as requisições assíncronas.
+* **Criação de Hooks Customizados para API (`useFetch`, `useAxios`):**
+  * **Motivação:** Abstrair a lógica repetitiva de requisições HTTP (estados de loading, error, data) em um hook reutilizável.
+  * **Implementação:** Como criar um hook que encapsula `useState`, `useEffect` e as chamadas Axios.
+* **Integração com o Backend (Simulado ou Real):** Utilização de uma API simulada (ex: JSON Server ou mock de dados) para testar as requisições, ou integração com um backend real se disponível.
+
+### Materiais de Referência
+
+* **Documentação Oficial do Axios:** [axios-http.com/docs/intro]
+* **Documentação React - Reusing Logic with Custom Hooks:** [react.dev/learn/reusing-logic-with-custom-hooks]
+* **Tutorial: Como usar Axios com React:** [www.freecodecamp.org/news/how-to-use-axios-with-react/]
+
+### Atividade Prática: Listagem de Pizzas e Detalhes com Axios e Hook Customizado
+
+**Objetivo:** Buscar a lista de pizzas e os detalhes de uma pizza específica de uma API (simulada com dados estáticos por enquanto) usando Axios e um hook customizado, exibindo estados de carregamento e erro.
+
+**Roteiro Detalhado para Vídeo e Laboratório:**
+
+#### **Passo 1: Instalação do Axios**
+
+1. **Abrir o Terminal:** Certifique-se de estar na pasta raiz do seu projeto `my-pizzaria-app`.
+2. **Instalar a Biblioteca:**
+   
+   ```bash
+   npm install axios
+   ```
+   
+   * Este comando adiciona o Axios às dependências do seu projeto.
+
+#### **Passo 2: Criar um Hook Customizado para Requisições de API (`useApi`)**
+
+Vamos criar um hook genérico que pode ser usado para qualquer requisição GET, gerenciando os estados de carregamento, erro e dados.
+
+1. **Criar Pasta `src/hooks`:** Se ainda não existir, crie a pasta `src/hooks`.
+2. **Criar `src/hooks/useApi.js`:**
+   
+   ```jsx
+   // src/hooks/useApi.js
+   import { useState, useEffect } from 'react';
+   import axios from 'axios';
+   
+   const useApi = (url) => {
+     const [data, setData] = useState(null);
+     const [loading, setLoading] = useState(true);
+     const [error, setError] = useState(null);
+   
+     useEffect(() => {
+       const fetchData = async () => {
+         try {
+           setLoading(true);
+           const response = await axios.get(url);
+           setData(response.data);
+         } catch (err) {
+           setError(err);
+         } finally {
+           setLoading(false);
+         }
+       };
+   
+       fetchData();
+     }, [url]); // O efeito é re-executado se a URL mudar
+   
+     return { data, loading, error };
+   };
+   
+   export default useApi;
+   ```
+   
+   * **Explicação:**
+     * O hook `useApi` recebe uma `url` como parâmetro.
+     * Ele usa `useState` para gerenciar `data`, `loading` e `error`.
+     * `useEffect` é usado para disparar a requisição Axios quando o componente que usa o hook é montado ou quando a `url` muda.
+     * A função `fetchData` é assíncrona, usando `try-catch-finally` para lidar com sucesso, erro e estado de carregamento.
+   * Salve o arquivo.
+
+#### **Passo 3: Simular Dados da API (Temporário)**
+
+Para testar nosso hook, vamos criar um arquivo com dados de pizzas que nosso hook `useApi` irá "buscar". Em um projeto real, esses dados viriam de um backend.
+
+1. **Criar `src/data/pizzas.js`:**
+   * Crie a pasta `src/data`.
+   * Adicione o seguinte conteúdo:
+     ```jsx
+     // src/data/pizzas.js
+     const pizzasData = [
+       {
+         id: 'p1',
+         name: 'Pizza Margherita',
+         description: 'Molho de tomate fresco, mussarela de búfala e manjericão.',
+         price: 45.00,
+         image: 'https://via.placeholder.com/150/FF0000/FFFFFF?text=Margherita'
+       },
+       {
+         id: 'p2',
+         name: 'Pizza Calabresa',
+         description: 'Molho de tomate, mussarela, calabresa fatiada e cebola roxa.',
+         price: 50.00,
+         image: 'https://via.placeholder.com/150/0000FF/FFFFFF?text=Calabresa'
+       },
+       {
+         id: 'p3',
+         name: 'Pizza Frango com Catupiry',
+         description: 'Molho de tomate, mussarela, frango desfiado temperado e catupiry original.',
+         price: 55.00,
+         image: 'https://via.placeholder.com/150/00FF00/FFFFFF?text=Frango'
+       },
+       {
+         id: 'p4',
+         name: 'Pizza Quatro Queijos',
+         description: 'Mussarela, provolone, parmesão e gorgonzola.',
+         price: 60.00,
+         image: 'https://via.placeholder.com/150/FFFF00/000000?text=4Queijos'
+       },
+       {
+         id: 'p5',
+         name: 'Pizza Portuguesa',
+         description: 'Molho de tomate, mussarela, presunto, ovos, cebola e azeitonas.',
+         price: 58.00,
+         image: 'https://via.placeholder.com/150/FF00FF/FFFFFF?text=Portuguesa'
+       },
+     ];
+     
+     export default pizzasData;
+     ```
+   * Salve o arquivo.
+
+#### **Passo 4: Integrar `useApi` no `CardapioPage.jsx` para Listar Pizzas**
+
+Vamos usar nosso novo hook para buscar e exibir a lista de pizzas.
+
+1. **Modificar `src/pages/CardapioPage.jsx`:**
+   * Remova os dados `pizzas` simulados diretamente no arquivo.
+   * Importe `useApi` e `pizzasData` (para simular a API).
+   * Use `useApi` para buscar os dados e renderize condicionalmente.
+     ```jsx
+     // src/pages/CardapioPage.jsx
+     import React from 'react';
+     import { Row, Col, Spinner, Alert } from 'react-bootstrap'; // Importar Spinner e Alert
+     import PizzaCard from '../components/PizzaCard';
+     import useApi from '../hooks/useApi'; // Importar o hook customizado
+     import pizzasData from '../data/pizzas'; // Importar dados simulados
+     
+     function CardapioPage() {
+       // Simular a URL da API. Em um backend real, seria algo como '/api/pizzas'
+       // Por enquanto, vamos usar os dados locais como se viessem de uma API
+       // const { data: pizzas, loading, error } = useApi('/api/pizzas'); // Para API real
+     
+       // Para simular, vamos apenas usar os dados locais e simular loading/error
+       const [pizzas, setPizzas] = React.useState([]);
+       const [loading, setLoading] = React.useState(true);
+       const [error, setError] = React.useState(null);
+     
+       React.useEffect(() => {
+         // Simular um atraso de rede
+         setTimeout(() => {
+           try {
+             setPizzas(pizzasData);
+             setLoading(false);
+           } catch (err) {
+             setError('Erro ao carregar as pizzas.');
+             setLoading(false);
+           }
+         }, 1000); // Atraso de 1 segundo
+       }, []);
+     
+       if (loading) {
+         return (
+           <div className="text-center mt-5">
+             <Spinner animation="border" role="status">
+               <span className="visually-hidden">Carregando...</span>
+             </Spinner>
+             <p>Carregando cardápio...</p>
+           </div>
+         );
+       }
+     
+       if (error) {
+         return <Alert variant="danger">Erro: {error}</Alert>;
+       }
+     
+       return (
+         <div>
+           <h1>Nosso Cardápio</h1>
+           <p>Escolha suas pizzas favoritas!</p>
+           <Row>
+             {pizzas.map((pizza) => (
+               <Col key={pizza.id} sm={12} md={6} lg={4}>
+                 <PizzaCard pizza={pizza} />
+               </Col>
+             ))}
+           </Row>
+         </div>
+       );
+     }
+     
+     export default CardapioPage;
+     ```
+   * **Observação:** Para esta quinzena, o `useApi` foi demonstrado, mas para simplificar a simulação de dados e o `loading`/`error` sem um backend real, usei `useState` e `useEffect` diretamente no `CardapioPage`. Se houvesse um backend real, o `useApi('/api/pizzas')` seria a forma correta.
+   * Salve o arquivo.
+
+#### **Passo 5: Integrar `useApi` no `DetalhePizzaPage.jsx` para Exibir Detalhes**
+
+Vamos usar o hook para buscar os detalhes de uma pizza específica.
+
+1. **Modificar `src/pages/DetalhePizzaPage.jsx`:**
+   * Importe `useParams`, `Spinner`, `Alert` e `pizzasData`.
+   * Use `useApi` (simulado) para buscar a pizza pelo ID.
+     ```jsx
+     // src/pages/DetalhePizzaPage.jsx
+     import React from 'react';
+     import { useParams } from 'react-router-dom';
+     import { Spinner, Alert, Card, Button } from 'react-bootstrap';
+     import pizzasData from '../data/pizzas'; // Importar dados simulados
+     
+     function DetalhePizzaPage() {
+       const { id } = useParams();
+       const [pizza, setPizza] = React.useState(null);
+       const [loading, setLoading] = React.useState(true);
+       const [error, setError] = React.useState(null);
+     
+       React.useEffect(() => {
+         setTimeout(() => {
+           try {
+             const foundPizza = pizzasData.find(p => p.id === id);
+             if (foundPizza) {
+               setPizza(foundPizza);
+             } else {
+               setError('Pizza não encontrada.');
+             }
+             setLoading(false);
+           } catch (err) {
+             setError('Erro ao carregar detalhes da pizza.');
+             setLoading(false);
+           }
+         }, 500); // Atraso de 0.5 segundo
+       }, [id]);
+     
+       if (loading) {
+         return (
+           <div className="text-center mt-5">
+             <Spinner animation="border" role="status">
+               <span className="visually-hidden">Carregando...</span>
+             </Spinner>
+             <p>Carregando detalhes da pizza...</p>
+           </div>
+         );
+       }
+     
+       if (error) {
+         return <Alert variant="danger">Erro: {error}</Alert>;
+       }
+     
+       if (!pizza) {
+         return <Alert variant="info">Nenhuma pizza encontrada com este ID.</Alert>;
+       }
+     
+       return (
+         <Card className="mt-4">
+           <Card.Img variant="top" src={pizza.image} alt={pizza.name} style={{ maxHeight: '300px', objectFit: 'cover' }} />
+           <Card.Body>
+             <Card.Title as="h1">{pizza.name}</Card.Title>
+             <Card.Text>{pizza.description}</Card.Text>
+             <h4>Preço: R$ {pizza.price.toFixed(2)}</h4>
+             <Button variant="primary">Adicionar ao Carrinho</Button> {/* Funcionalidade a ser implementada */}
+           </Card.Body>
+         </Card>
+       );
+     }
+     
+     export default DetalhePizzaPage;
+     ```
+   * **Observação:** Similar ao `CardapioPage`, a simulação de `useApi` é feita diretamente com `useState` e `useEffect` para usar os dados locais. Em um cenário real, o `useApi` seria usado com a URL da API real.
+   * Salve o arquivo.
+
+#### **Passo 6: Verificação e Encerramento da Quinzena 4**
+
+1. **Testar Listagem e Detalhes:**
+   * No navegador, vá para a página de Cardápio (`/cardapio`). Observe o spinner de carregamento e a lista de pizzas.
+   * Clique em uma pizza (ou navegue para `/pizza/p1`, `/pizza/p2`, etc.) e veja os detalhes. Tente um ID inexistente (ex: `/pizza/p99`) para ver a mensagem de erro.
+2. **Revisão:** Verifique o console do navegador para quaisquer erros ou avisos.
+3. **Encerramento do Vídeo/Laboratório:** Resuma a importância do Axios para requisições HTTP e como hooks customizados como `useApi` ajudam a organizar e reutilizar a lógica de acesso a dados, incluindo o tratamento de estados de carregamento e erro. Mencione que na próxima quinzena serão abordados os formulários com React Hook Form.
+
+---
+
+## Quinzena 5 (Maio) - Formulários com React Hook Form e Validação
+
+### Conteúdo
+
+Esta quinzena abordará a criação e validação de formulários em React, utilizando a biblioteca React Hook Form, que otimiza a performance e simplifica o gerenciamento de estados de formulário.
+
+*   **Desafios de Gerenciamento de Formulários em React:** Discussão sobre as complexidades de lidar com estados de input, validação e submissão em formulários React tradicionais (componentes controlados).
+*   **Introdução ao React Hook Form:**
+    *   **O que é:** Uma biblioteca para gerenciar formulários de forma eficiente no React.
+    *   **Vantagens:** Performance otimizada (evita re-renderizações desnecessárias), validação simplificada, API intuitiva, integração com componentes de UI.
+*   **Instalação e Configuração Básica:**
+    *   `useForm`: O hook principal para inicializar o formulário e obter métodos e estados.
+    *   `register`: Função para registrar inputs no React Hook Form, conectando-os ao estado do formulário.
+    *   `handleSubmit`: Função que envolve a lógica de submissão, disparando a validação antes de executar o callback de sucesso.
+    *   `formState`: Objeto que contém informações sobre o estado do formulário (erros, dirty, touched, isValid, etc.).
+*   **Validação de Formulários:**
+    *   **Regras de Validação:** Como aplicar regras built-in (ex: `required`, `minLength`, `maxLength`, `pattern`, `min`, `max`) diretamente no `register`.
+    *   **Validação Customizada:** Como criar suas próprias regras de validação.
+*   **Exibição de Mensagens de Erro:** Como acessar os erros via `formState.errors` e exibi-los de forma amigável para o usuário.
+*   **Integração com Bibliotecas de UI (React-Bootstrap):** Como usar o React Hook Form com componentes de formulário do React-Bootstrap, mantendo a estilização e a acessibilidade.
+
+### Materiais de Referência
+
+*   **Documentação Oficial do React Hook Form:** [react-hook-form.com/get-started]
+*   **Tutorial React Hook Form com Validação:** [www.freecodecamp.org/news/react-hook-form-tutorial-with-validation/]
+
+### Atividade Prática: Formulário de Pedido de Pizza com Validação
+
+**Objetivo:** Criar um formulário de pedido de pizza completo, utilizando o React Hook Form para gerenciar os inputs e aplicar validações robustas, exibindo mensagens de erro para o usuário.
+
+**Roteiro Detalhado para Vídeo e Laboratório:**
+
+#### **Passo 1: Instalação do React Hook Form**
+
+1.  **Abrir o Terminal:** Certifique-se de estar na pasta raiz do seu projeto `my-pizzaria-app`.
+2.  **Instalar a Biblioteca:**
+    ```bash
+    npm install react-hook-form
+    ```
+    *   Este comando adiciona o React Hook Form às dependências do seu projeto.
+
+#### **Passo 2: Criar o Componente `PedidoForm`**
+
+Vamos criar um componente para o formulário de pedido, que incluirá campos para informações do cliente e detalhes do pedido.
+
+1.  **Criar `src/components/PedidoForm.jsx`:**
+    ```jsx
+    // src/components/PedidoForm.jsx
+    import React from 'react';
+    import { useForm } from 'react-hook-form'; // Importar useForm
+    import { Form, Button, Row, Col } from 'react-bootstrap';
+
+    function PedidoForm() {
+      const { register, handleSubmit, formState: { errors } } = useForm(); // Inicializar useForm
+
+      const onSubmit = (data) => {
+        console.log('Dados do Pedido:', data);
+        alert('Pedido realizado com sucesso! Verifique o console para os dados.');
+        // Aqui você enviaria os dados para o backend
+      };
+
+      return (
+        <Form onSubmit={handleSubmit(onSubmit)} className="mt-4">
+          <h2>Seus Dados</h2>
+          <Row className="mb-3">
+            <Form.Group as={Col} controlId="formGridNome">
+              <Form.Label>Nome Completo</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Seu nome"
+                {...register('nome', { required: 'Nome é obrigatório' })}
+              />
+              {errors.nome && <p className="text-danger">{errors.nome.message}</p>}
+            </Form.Group>
+
+            <Form.Group as={Col} controlId="formGridEmail">
+              <Form.Label>Email</Form.Label>
+              <Form.Control
+                type="email"
+                placeholder="seu@email.com"
+                {...register('email', {
+                  required: 'Email é obrigatório',
+                  pattern: {
+                    value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                    message: 'Email inválido'
+                  }
+                })}
+              />
+              {errors.email && <p className="text-danger">{errors.email.message}</p>}
+            </Form.Group>
+          </Row>
+
+          <Form.Group className="mb-3" controlId="formGridEndereco">
+            <Form.Label>Endereço</Form.Label>
+            <Form.Control
+              placeholder="Rua, número, bairro"
+              {...register('endereco', { required: 'Endereço é obrigatório' })}
+            />
+            {errors.endereco && <p className="text-danger">{errors.endereco.message}</p>}
+          </Form.Group>
+
+          <Row className="mb-3">
+            <Form.Group as={Col} controlId="formGridTelefone">
+              <Form.Label>Telefone</Form.Label>
+              <Form.Control
+                type="tel"
+                placeholder="(XX) XXXXX-XXXX"
+                {...register('telefone', {
+                  required: 'Telefone é obrigatório',
+                  pattern: {
+                    value: /^\(?\d{2}\)?\s?\d{4,5}\-?\d{4}$/,
+                    message: 'Formato de telefone inválido'
+                  }
+                })}
+              />
+              {errors.telefone && <p className="text-danger">{errors.telefone.message}</p>}
+            </Form.Group>
+
+            <Form.Group as={Col} controlId="formGridPagamento">
+              <Form.Label>Forma de Pagamento</Form.Label>
+              <Form.Select
+                defaultValue="Dinheiro"
+                {...register('pagamento', { required: 'Forma de pagamento é obrigatória' })}
+              >
+                <option value="Dinheiro">Dinheiro</option>
+                <option value="CartaoCredito">Cartão de Crédito</option>
+                <option value="CartaoDebito">Cartão de Débito</option>
+                <option value="Pix">Pix</option>
+              </Form.Select>
+              {errors.pagamento && <p className="text-danger">{errors.pagamento.message}</p>}
+            </Form.Group>
+          </Row>
+
+          <Button variant="success" type="submit">
+            Finalizar Pedido
+          </Button>
+        </Form>
+      );
+    }
+
+    export default PedidoForm;
+    ```
+    *   **Explicação:**
+        *   `useForm()` é inicializado para obter `register`, `handleSubmit` e `formState: { errors }`.
+        *   Cada `Form.Control` do React-Bootstrap é conectado ao React Hook Form usando o spread operator `{...register('nomeDoCampo', { regrasDeValidacao })}`.
+        *   As regras de validação (`required`, `pattern`) são definidas diretamente no `register`.
+        *   As mensagens de erro são exibidas condicionalmente usando `errors.nomeDoCampo && <p className="text-danger">{errors.nomeDoCampo.message}</p>`.
+        *   A função `onSubmit` é chamada apenas se o formulário for válido.
+    *   Salve o arquivo.
+
+#### **Passo 3: Integrar o `PedidoForm` na Página do Carrinho**
+
+Vamos adicionar o formulário de pedido à página do carrinho, para que o usuário possa finalizar a compra.
+
+1.  **Modificar `src/pages/CarrinhoPage.jsx`:**
+    *   Importe `PedidoForm`.
+    *   Adicione o componente `PedidoForm` abaixo do resumo do carrinho.
         ```jsx
-        // src/pages/CarrinhoPage.jsx
+        // src/pages/CarrinhoPage.jsx (trecho do return)
         import React from 'react';
-        import { useCart } from '../context/CartContext'; // Importar o hook useCart
+        import { useCart } from '../context/CartContext';
         import { ListGroup, Button, Row, Col } from 'react-bootstrap';
-        
+        import PedidoForm from '../components/PedidoForm'; // Importar PedidoForm
+
         function CarrinhoPage() {
-          const { cartState, dispatch } = useCart(); // Obter estado e dispatch
-        
+          const { cartState, dispatch } = useCart();
+
           const handleRemoveItem = (id) => {
             dispatch({ type: 'REMOVE_ITEM', payload: { id } });
           };
-        
+
           const handleClearCart = () => {
             dispatch({ type: 'CLEAR_CART' });
             alert('Carrinho limpo!');
           };
-        
+
           return (
             <div>
               <h1>Seu Carrinho de Compras</h1>
               {cartState.items.length === 0 ? (
-                <p>Seu carrinho está vazio.</p>
+                <p>Seu carrinho está vazio. Adicione algumas pizzas do <a href="/cardapio">cardápio</a>!</p>
               ) : (
                 <>
                   <ListGroup>
@@ -882,357 +1449,25 @@ Agora, vamos exibir os itens no carrinho e permitir que o usuário remova ou lim
                   <Button variant="warning" onClick={handleClearCart} className="mt-3">
                     Limpar Carrinho
                   </Button>
-                  <Button variant="success" className="mt-3 ms-2">
-                    Finalizar Pedido
-                  </Button>
+                  {/* O botão de finalizar pedido agora estará no formulário */}
+                  <hr className="my-4" />
+                  <PedidoForm /> {/* Adicionar o formulário de pedido */}
                 </>
               )}
             </div>
           );
         }
-        
+
         export default CarrinhoPage;
         ```
-    * Salve o arquivo.
-
-#### **Passo 6: Adicionar Contador de Itens no Header (Opcional, mas recomendado)**
-
-Para melhorar a experiência do usuário, vamos exibir o número de itens no carrinho na Navbar.
-
-1. **Modificar `src/components/Header.jsx`:**
-    * Importe `useCart` e `Badge` do React-Bootstrap.
-    * Adicione um `Badge` ao lado do link do carrinho.
-        ```jsx
-        // src/components/Header.jsx
-        import React from 'react';
-        import { Navbar, Container, Nav, Badge } from 'react-bootstrap'; // Importar Badge
-        import { Link, NavLink } from 'react-router-dom';
-        import { useCart } from '../context/CartContext'; // Importar useCart
-        
-        function Header() {
-          const { cartState } = useCart(); // Obter o estado do carrinho
-          const totalItems = cartState.items.reduce((sum, item) => sum + item.quantity, 0);
-        
-          return (
-            <Navbar bg="dark" variant="dark" expand="lg">
-              <Container>
-                <Navbar.Brand as={Link} to="/">Pizzaria Digital</Navbar.Brand>
-                <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                <Navbar.Collapse id="basic-navbar-nav">
-                  <Nav className="me-auto">
-                    <NavLink as={Link} to="/" className="nav-link">Home</NavLink>
-                    <NavLink as={Link} to="/cardapio" className="nav-link">Cardápio</NavLink>
-                    <NavLink as={Link} to="/carrinho" className="nav-link">
-                      Carrinho <Badge bg="secondary">{totalItems}</Badge> {/* Exibir total de itens */}
-                    </NavLink>
-                    <NavLink as={Link} to="/login" className="nav-link">Login</NavLink>
-                  </Nav>
-                </Navbar.Collapse>
-              </Container>
-            </Navbar>
-          );
-        }
-        
-        export default Header;
-        ```
-    * Salve o arquivo.
-
-#### **Passo 7: Verificação e Encerramento da Quinzena 3**
-
-1. **Testar o Carrinho:**
-    * No navegador, vá para a página de Cardápio (`/cardapio`). Observe o spinner de carregamento e a lista de pizzas.
-    * Clique em "Adicionar ao Carrinho" em algumas pizzas. Observe o contador no `Header` e os itens na página do Carrinho (`/carrinho`).
-    * Tente remover itens e limpar o carrinho.
-    * Recarregue a página (F5) e verifique se os itens do carrinho persistem (graças ao `localStorage`).
-2. **Revisão:** Verifique o console do navegador para quaisquer erros ou avisos.
-3. **Encerramento do Vídeo/Laboratório:** Resuma como a Context API e o `useReducer` foram usados para gerenciar o estado global do carrinho, e como o `localStorage` garante a persistência dos dados. Mencione que na próxima quinzena serão abordadas as requisições HTTP com Axios.
-
-## Quinzena 4 (Maio) - Requisições HTTP com Axios e Hooks Customizados
-
-### Conteúdo
-
-Esta quinzena focará na comunicação da aplicação React com um backend, utilizando a biblioteca Axios para realizar requisições HTTP e criando hooks customizados para encapsular a lógica de acesso a dados.
-
-*   **Introdução a Requisições HTTP em React:**
-    *   **`fetch` API nativa:** Breve revisão da API `fetch` do navegador.
-    *   **Axios:** Apresentação do Axios como uma alternativa popular e mais robusta ao `fetch`.
-    *   **Vantagens do Axios:** Interceptores de requisição/resposta, tratamento automático de JSON, cancelamento de requisições, API mais amigável.
-*   **Instalação e Configuração do Axios:** Como adicionar o Axios ao projeto e realizar configurações básicas (ex: `baseURL`).
-*   **Realizando Requisições CRUD (GET, POST, PUT, DELETE):** Exemplos práticos de como usar o Axios para interagir com uma API RESTful.
-*   **Tratamento de Erros e Estados de Carregamento:** Como exibir mensagens de carregamento (`loading`) e de erro (`error`) para o usuário durante as requisições assíncronas.
-*   **Criação de Hooks Customizados para API (`useFetch`, `useAxios`):**
-    *   **Motivação:** Abstrair a lógica repetitiva de requisições HTTP (estados de loading, error, data) em um hook reutilizável.
-    *   **Implementação:** Como criar um hook que encapsula `useState`, `useEffect` e as chamadas Axios.
-*   **Integração com o Backend (Simulado ou Real):** Utilização de uma API simulada (ex: JSON Server ou mock de dados) para testar as requisições, ou integração com um backend real se disponível.
-
-### Materiais de Referência
-
-*   **Documentação Oficial do Axios:** [axios-http.com/docs/intro]
-*   **Documentação React - Reusing Logic with Custom Hooks:** [react.dev/learn/reusing-logic-with-custom-hooks]
-*   **Tutorial: Como usar Axios com React:** [www.freecodecamp.org/news/how-to-use-axios-with-react/]
-
-### Atividade Prática: Listagem de Pizzas e Detalhes com Axios e Hook Customizado
-
-**Objetivo:** Buscar a lista de pizzas e os detalhes de uma pizza específica de uma API (simulada com dados estáticos por enquanto) usando Axios e um hook customizado, exibindo estados de carregamento e erro.
-
-**Roteiro Detalhado para Vídeo e Laboratório:**
-
-#### **Passo 1: Instalação do Axios**
-
-1.  **Abrir o Terminal:** Certifique-se de estar na pasta raiz do seu projeto `my-pizzaria-app`.
-2.  **Instalar a Biblioteca:**
-    ```bash
-    npm install axios
-    ```
-    *   Este comando adiciona o Axios às dependências do seu projeto.
-
-#### **Passo 2: Criar um Hook Customizado para Requisições de API (`useApi`)**
-
-Vamos criar um hook genérico que pode ser usado para qualquer requisição GET, gerenciando os estados de carregamento, erro e dados.
-
-1.  **Criar Pasta `src/hooks`:** Se ainda não existir, crie a pasta `src/hooks`.
-2.  **Criar `src/hooks/useApi.js`:**
-    ```jsx
-    // src/hooks/useApi.js
-    import { useState, useEffect } from 'react';
-    import axios from 'axios';
-
-    const useApi = (url) => {
-      const [data, setData] = useState(null);
-      const [loading, setLoading] = useState(true);
-      const [error, setError] = useState(null);
-
-      useEffect(() => {
-        const fetchData = async () => {
-          try {
-            setLoading(true);
-            const response = await axios.get(url);
-            setData(response.data);
-          } catch (err) {
-            setError(err);
-          } finally {
-            setLoading(false);
-          }
-        };
-
-        fetchData();
-      }, [url]); // O efeito é re-executado se a URL mudar
-
-      return { data, loading, error };
-    };
-
-    export default useApi;
-    ```
-    *   **Explicação:**
-        *   O hook `useApi` recebe uma `url` como parâmetro.
-        *   Ele usa `useState` para gerenciar `data`, `loading` e `error`.
-        *   `useEffect` é usado para disparar a requisição Axios quando o componente que usa o hook é montado ou quando a `url` muda.
-        *   A função `fetchData` é assíncrona, usando `try-catch-finally` para lidar com sucesso, erro e estado de carregamento.
     *   Salve o arquivo.
 
-#### **Passo 3: Simular Dados da API (Temporário)**
+#### **Passo 4: Verificação e Encerramento da Quinzena 5**
 
-Para testar nosso hook, vamos criar um arquivo com dados de pizzas que nosso hook `useApi` irá "buscar". Em um projeto real, esses dados viriam de um backend.
-
-1.  **Criar `src/data/pizzas.js`:**
-    *   Crie a pasta `src/data`.
-    *   Adicione o seguinte conteúdo:
-        ```jsx
-        // src/data/pizzas.js
-        const pizzasData = [
-          {
-            id: 'p1',
-            name: 'Pizza Margherita',
-            description: 'Molho de tomate fresco, mussarela de búfala e manjericão.',
-            price: 45.00,
-            image: 'https://via.placeholder.com/150/FF0000/FFFFFF?text=Margherita'
-          },
-          {
-            id: 'p2',
-            name: 'Pizza Calabresa',
-            description: 'Molho de tomate, mussarela, calabresa fatiada e cebola roxa.',
-            price: 50.00,
-            image: 'https://via.placeholder.com/150/0000FF/FFFFFF?text=Calabresa'
-          },
-          {
-            id: 'p3',
-            name: 'Pizza Frango com Catupiry',
-            description: 'Molho de tomate, mussarela, frango desfiado temperado e catupiry original.',
-            price: 55.00,
-            image: 'https://via.placeholder.com/150/00FF00/FFFFFF?text=Frango'
-          },
-          {
-            id: 'p4',
-            name: 'Pizza Quatro Queijos',
-            description: 'Mussarela, provolone, parmesão e gorgonzola.',
-            price: 60.00,
-            image: 'https://via.placeholder.com/150/FFFF00/000000?text=4Queijos'
-          },
-          {
-            id: 'p5',
-            name: 'Pizza Portuguesa',
-            description: 'Molho de tomate, mussarela, presunto, ovos, cebola e azeitonas.',
-            price: 58.00,
-            image: 'https://via.placeholder.com/150/FF00FF/FFFFFF?text=Portuguesa'
-          },
-        ];
-
-        export default pizzasData;
-        ```
-    *   Salve o arquivo.
-
-#### **Passo 4: Integrar `useApi` no `CardapioPage.jsx` para Listar Pizzas**
-
-Vamos usar nosso novo hook para buscar e exibir a lista de pizzas.
-
-1.  **Modificar `src/pages/CardapioPage.jsx`:**
-    *   Remova os dados `pizzas` simulados diretamente no arquivo.
-    *   Importe `useApi` e `pizzasData` (para simular a API).
-    *   Use `useApi` para buscar os dados e renderize condicionalmente.
-        ```jsx
-        // src/pages/CardapioPage.jsx
-        import React from 'react';
-        import { Row, Col, Spinner, Alert } from 'react-bootstrap'; // Importar Spinner e Alert
-        import PizzaCard from '../components/PizzaCard';
-        import useApi from '../hooks/useApi'; // Importar o hook customizado
-        import pizzasData from '../data/pizzas'; // Importar dados simulados
-
-        function CardapioPage() {
-          // Simular a URL da API. Em um backend real, seria algo como '/api/pizzas'
-          // Por enquanto, vamos usar os dados locais como se viessem de uma API
-          // const { data: pizzas, loading, error } = useApi('/api/pizzas'); // Para API real
-
-          // Para simular, vamos apenas usar os dados locais e simular loading/error
-          const [pizzas, setPizzas] = React.useState([]);
-          const [loading, setLoading] = React.useState(true);
-          const [error, setError] = React.useState(null);
-
-          React.useEffect(() => {
-            // Simular um atraso de rede
-            setTimeout(() => {
-              try {
-                setPizzas(pizzasData);
-                setLoading(false);
-              } catch (err) {
-                setError('Erro ao carregar as pizzas.');
-                setLoading(false);
-              }
-            }, 1000); // Atraso de 1 segundo
-          }, []);
-
-          if (loading) {
-            return (
-              <div className="text-center mt-5">
-                <Spinner animation="border" role="status">
-                  <span className="visually-hidden">Carregando...</span>
-                </Spinner>
-                <p>Carregando cardápio...</p>
-              </div>
-            );
-          }
-
-          if (error) {
-            return <Alert variant="danger">Erro: {error}</Alert>;
-          }
-
-          return (
-            <div>
-              <h1>Nosso Cardápio</h1>
-              <p>Escolha suas pizzas favoritas!</p>
-              <Row>
-                {pizzas.map((pizza) => (
-                  <Col key={pizza.id} sm={12} md={6} lg={4}>
-                    <PizzaCard pizza={pizza} />
-                  </Col>
-                ))}
-              </Row>
-            </div>
-          );
-        }
-
-        export default CardapioPage;
-        ```
-    *   **Observação:** Para esta quinzena, o `useApi` foi demonstrado, mas para simplificar a simulação de dados e o `loading`/`error` sem um backend real, usei `useState` e `useEffect` diretamente no `CardapioPage`. Se houvesse um backend real, o `useApi('/api/pizzas')` seria a forma correta.
-    *   Salve o arquivo.
-
-#### **Passo 5: Integrar `useApi` no `DetalhePizzaPage.jsx` para Exibir Detalhes**
-
-Vamos usar o hook para buscar os detalhes de uma pizza específica.
-
-1.  **Modificar `src/pages/DetalhePizzaPage.jsx`:**
-    *   Importe `useParams`, `Spinner`, `Alert` e `pizzasData`.
-    *   Use `useApi` (simulado) para buscar a pizza pelo ID.
-        ```jsx
-        // src/pages/DetalhePizzaPage.jsx
-        import React from 'react';
-        import { useParams } from 'react-router-dom';
-        import { Spinner, Alert, Card, Button } from 'react-bootstrap';
-        import pizzasData from '../data/pizzas'; // Importar dados simulados
-
-        function DetalhePizzaPage() {
-          const { id } = useParams();
-          const [pizza, setPizza] = React.useState(null);
-          const [loading, setLoading] = React.useState(true);
-          const [error, setError] = React.useState(null);
-
-          React.useEffect(() => {
-            setTimeout(() => {
-              try {
-                const foundPizza = pizzasData.find(p => p.id === id);
-                if (foundPizza) {
-                  setPizza(foundPizza);
-                } else {
-                  setError('Pizza não encontrada.');
-                }
-                setLoading(false);
-              } catch (err) {
-                setError('Erro ao carregar detalhes da pizza.');
-                setLoading(false);
-              }
-            }, 500); // Atraso de 0.5 segundo
-          }, [id]);
-
-          if (loading) {
-            return (
-              <div className="text-center mt-5">
-                <Spinner animation="border" role="status">
-                  <span className="visually-hidden">Carregando...</span>
-                </Spinner>
-                <p>Carregando detalhes da pizza...</p>
-              </div>
-            );
-          }
-
-          if (error) {
-            return <Alert variant="danger">Erro: {error}</Alert>;
-          }
-
-          if (!pizza) {
-            return <Alert variant="info">Nenhuma pizza encontrada com este ID.</Alert>;
-          }
-
-          return (
-            <Card className="mt-4">
-              <Card.Img variant="top" src={pizza.image} alt={pizza.name} style={{ maxHeight: '300px', objectFit: 'cover' }} />
-              <Card.Body>
-                <Card.Title as="h1">{pizza.name}</Card.Title>
-                <Card.Text>{pizza.description}</Card.Text>
-                <h4>Preço: R$ {pizza.price.toFixed(2)}</h4>
-                <Button variant="primary">Adicionar ao Carrinho</Button> {/* Funcionalidade a ser implementada */}
-              </Card.Body>
-            </Card>
-          );
-        }
-
-        export default DetalhePizzaPage;
-        ```
-    *   **Observação:** Similar ao `CardapioPage`, a simulação de `useApi` é feita diretamente com `useState` e `useEffect` para usar os dados locais. Em um cenário real, o `useApi` seria usado com a URL da API real.
-    *   Salve o arquivo.
-
-#### **Passo 6: Verificação e Encerramento da Quinzena 4**
-
-1.  **Testar Listagem e Detalhes:**
-    *   No navegador, vá para a página de Cardápio (`/cardapio`). Observe o spinner de carregamento e a lista de pizzas.
-    *   Clique em uma pizza (ou navegue para `/pizza/p1`, `/pizza/p2`, etc.) e veja os detalhes. Tente um ID inexistente (ex: `/pizza/p99`) para ver a mensagem de erro.
+1.  **Testar o Formulário:**
+    *   No navegador, adicione algumas pizzas ao carrinho (`/cardapio`).
+    *   Vá para a página do Carrinho (`/carrinho`).
+    *   Tente submeter o formulário sem preencher os campos obrigatórios. Observe as mensagens de erro.
+    *   Preencha o formulário corretamente e submeta. Verifique o console para os dados do pedido.
 2.  **Revisão:** Verifique o console do navegador para quaisquer erros ou avisos.
-3.  **Encerramento do Vídeo/Laboratório:** Resuma a importância do Axios para requisições HTTP e como hooks customizados como `useApi` ajudam a organizar e reutilizar a lógica de acesso a dados, incluindo o tratamento de estados de carregamento e erro. Mencione que na próxima quinzena serão abordados os formulários com React Hook Form.
+3.  **Encerramento do Vídeo/Laboratório:** Resuma como o React Hook Form simplifica a criação e validação de formulários, melhorando a performance e a experiência do desenvolvedor. Destaque o uso de `register`, `handleSubmit` e `formState.errors`. Mencione que na próxima quinzena será abordada a autenticação de usuários.
