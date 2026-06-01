@@ -1,3 +1,15 @@
+## Menu das Quinzenas
+
+Acesso rápido:
+
+- [Quinzena 1](#quinzena-1)
+- [Quinzena 2](#quinzena-2)
+- [Quinzena 3](#quinzena-3)
+- [Quinzena 4](#quinzena-4)
+- [Quinzena 5](#quinzena-5)
+- [Quinzena 6](#quinzena-6)
+
+<a id="quinzena-1"></a>
 ## Quinzena 1 (Fevereiro) - Introdução ao ReactJS, Setup com Vite e Componentização
 
 ### Conteúdo
@@ -217,6 +229,7 @@ Uma boa estrutura de pastas é crucial para a manutenção do projeto. Vamos cri
 2. **Revisão:** Verifique se não há erros no console do navegador (F12).
 3. **Encerramento do Vídeo/Laboratório:** Resuma o que foi feito (setup do projeto, instalação de dependências, criação de componentes básicos e organização de pastas). Mencione que na próxima quinzena será implementado o roteamento para as diferentes páginas.
 
+<a id="quinzena-2"></a>
 ## Quinzena 2 (Março) - Roteamento com React Router DOM
 
 ### Conteúdo
@@ -536,6 +549,7 @@ Vamos simular um login e usar `useNavigate` para redirecionar o usuário.
 
 ---
 
+<a id="quinzena-3"></a>
 ## Quinzena 3 (Março) - Gerenciamento de Estado com Context API e Reducers
 
 ### Conteúdo
@@ -947,6 +961,7 @@ Para melhorar a experiência do usuário, vamos exibir o número de itens no car
 2. **Revisão:** Verifique o console do navegador para quaisquer erros ou avisos.
 3. **Encerramento do Vídeo/Laboratório:** Resuma como a Context API e o `useReducer` foram usados para gerenciar o estado global do carrinho, e como o `localStorage` garante a persistência dos dados. Mencione que na próxima quinzena serão abordadas as requisições HTTP com Axios.
 
+<a id="quinzena-4"></a>
 ## Quinzena 4 (Maio) - Requisições HTTP com Axios e Hooks Customizados
 
 ### Conteúdo
@@ -1243,6 +1258,7 @@ Vamos usar o hook para buscar os detalhes de uma pizza específica.
 
 ---
 
+<a id="quinzena-5"></a>
 ## Quinzena 5 (Maio) - Formulários com React Hook Form e Validação
 
 ### Conteúdo
@@ -1472,6 +1488,7 @@ Vamos adicionar o formulário de pedido à página do carrinho, para que o usuá
 2.  **Revisão:** Verifique o console do navegador para quaisquer erros ou avisos.
 3.  **Encerramento do Vídeo/Laboratório:** Resuma como o React Hook Form simplifica a criação e validação de formulários, melhorando a performance e a experiência do desenvolvedor. Destaque o uso de `register`, `handleSubmit` e `formState.errors`. Mencione que na próxima quinzena será abordada a autenticação de usuários.
 
+<a id="quinzena-6"></a>
 ## Quinzena 6 (Junho) - Autenticação e Rotas Protegidas
 
 ### Conteúdo
