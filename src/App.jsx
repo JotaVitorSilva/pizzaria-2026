@@ -9,6 +9,7 @@ import CardapioPage from "./pages/CardapioPage";
 import CarrinhoPage from "./pages/CarrinhoPage";
 import LoginPage from "./pages/LoginPage";
 import DetalhePizzaPage from "./pages/DetalhePizzaPage";
+import ProtectedRoute from './components/ProtectedRoute';
 
 function App() {
   return (
@@ -20,11 +21,16 @@ function App() {
         <Routes>
           {" "}
           {/* Definir as rotas aqui */}
-          <Route path="/home" element={<HomePage />} />
+          <Route path="/" element={<HomePage />} />
           <Route path="/cardapio" element={<CardapioPage />} />
-          <Route path="/carrinho" element={<CarrinhoPage />} />
-          <Route index element={<LoginPage />} />
+          <Route path="/login" element={<LoginPage />} />
           <Route path="/pizza/:id" element={<DetalhePizzaPage />} />{" "}{/* Rota para detalhes da pizza */}
+
+          <Route element={<ProtectedRoute/>}>
+            <Route path="/carrinho" element={<CarrinhoPage />} />
+          </Route>
+
+          <Route path="*" element={<h1>404 - Página não encontrada</h1>} />
         </Routes>
       </Container>
       <Footer />

@@ -1471,3 +1471,360 @@ Vamos adicionar o formulário de pedido à página do carrinho, para que o usuá
     *   Preencha o formulário corretamente e submeta. Verifique o console para os dados do pedido.
 2.  **Revisão:** Verifique o console do navegador para quaisquer erros ou avisos.
 3.  **Encerramento do Vídeo/Laboratório:** Resuma como o React Hook Form simplifica a criação e validação de formulários, melhorando a performance e a experiência do desenvolvedor. Destaque o uso de `register`, `handleSubmit` e `formState.errors`. Mencione que na próxima quinzena será abordada a autenticação de usuários.
+
+## Quinzena 6 (Junho) - Autenticação e Rotas Protegidas
+
+### Conteúdo
+
+Esta quinzena abordará a implementação de um sistema de autenticação básico em uma aplicação React, focando na gestão do estado de autenticação e na proteção de rotas para usuários logados.
+
+*   **Conceitos de Autenticação e Autorização em SPAs:**
+    *   **Autenticação:** Verificação da identidade do usuário (quem você é).
+    *   **Autorização:** Verificação das permissões do usuário (o que você pode fazer).
+    *   **Tokens (ex: JWT):** Como tokens são usados para manter o estado de autenticação sem sessões no servidor (stateless).
+*   **Simulação de Login/Logout:** Implementação de um fluxo básico de login e logout, com armazenamento de um token (simulado) no `localStorage` do navegador.
+*   **Criação de um `AuthContext`:**
+    *   **Motivação:** Gerenciar o estado de autenticação (usuário logado, token) globalmente e disponibilizá-lo para toda a aplicação.
+    *   **`AuthProvider`:** Componente que envolve a aplicação e fornece o contexto de autenticação.
+    *   **`useAuth`:** Hook customizado para consumir o `AuthContext`.
+*   **Implementação de Rotas Protegidas com React Router DOM:**
+    *   **`Outlet`:** Componente do React Router DOM usado para renderizar rotas filhas em layouts aninhados.
+    *   **Componentes de Wrapper (`ProtectedRoute`):** Criação de um componente que verifica o status de autenticação antes de renderizar o conteúdo da rota, redirecionando o usuário se não estiver autenticado.
+*   **Redirecionamento de Usuários Não Autenticados:** Como usar `useNavigate` para enviar usuários para a página de login quando tentam acessar uma rota protegida sem permissão.
+*   **Exibição Condicional de Elementos da UI:** Como mostrar ou ocultar partes da interface (ex: botão de login/logout, itens de menu) com base no status de autenticação do usuário.
+
+### Materiais de Referência
+
+*   **Tutorial: Autenticação em React com Context API:** [www.freecodecamp.org/news/how-to-handle-authentication-in-react-with-context-api/]
+*   **React Router DOM - Protected Routes:** [reactrouter.com/en/main/components/outlet]
+*   **Entenda o que é JWT:** [jwt.io/introduction/]
+
+### Atividade Prática: Login e Proteção de Rotas na Pizzaria
+
+**Objetivo:** Implementar um sistema de login/logout funcional e proteger rotas específicas da Pizzaria Digital, garantindo que apenas usuários autenticados possam acessá-las. O estado de autenticação será gerenciado globalmente via Context API.
+
+**Roteiro Detalhado para Vídeo e Laboratório:**
+
+#### **Passo 1: Criação do `AuthContext`**
+
+Vamos criar o contexto que gerenciará o estado de autenticação do usuário.
+
+1.  **Criar `src/context/AuthContext.jsx`:**
+    ```jsx
+    // src/context/AuthContext.jsx
+    import React, { createContext, useState, useContext, useEffect } from 'react';
+
+    // 1. Criar o Contexto de Autenticação
+    export const AuthContext = createContext(null);
+
+    // 2. Criar o Provider de Autenticação
+    export const AuthProvider = ({ children }) => {
+      const [user, setUser] = useState(null);
+      const [token, setToken] = useState(localStorage.getItem('authToken') || null);
+
+      // Efeito para carregar o usuário/token do localStorage na inicialização
+      useEffect(() => {
+        if (token) {
+          // Em um cenário real, você decodificaria o JWT ou faria uma requisição para validar o token
+          // Por simplicidade, vamos apenas simular um usuário
+          setUser({ name: 'Usuário Teste', email: 'teste@pizzaria.com' });
+        }
+      }, [token]);
+
+      const login = (newToken) => {
+        setToken(newToken);
+        localStorage.setItem('authToken', newToken);
+        // Simular o usuário após o login
+        setUser({ name: 'Usuário Teste', email: 'teste@pizzaria.com' });
+      };
+
+      const logout = () => {
+        setToken(null);
+        setUser(null);
+        localStorage.removeItem('authToken');
+      };
+
+      const isAuthenticated = !!user; // true se user não for null
+
+      return (
+        <AuthContext.Provider value={{ user, isAuthenticated, login, logout }}>
+          {children}
+        </AuthContext.Provider>
+      );
+    };
+
+    // 3. Hook customizado para facilitar o uso do contexto
+    export const useAuth = () => {
+      return useContext(AuthContext);
+    };
+    ```
+    *   **Explicação:**
+        *   `AuthContext`: O contexto em si.
+        *   `AuthProvider`: Gerencia o estado `user` e `token`, e as funções `login` e `logout`. Ele também persiste o `token` no `localStorage`.
+        *   `useAuth`: Hook customizado para consumir o contexto.
+    *   Salve o arquivo.
+
+#### **Passo 2: Integrar o `AuthProvider` na Aplicação**
+
+Assim como o `CartProvider`, o `AuthProvider` precisa envolver a aplicação para que o estado de autenticação esteja disponível globalmente.
+
+1.  **Modificar `src/main.jsx`:**
+    *   Importe `AuthProvider` e envolva o `<App />` com ele (dentro do `BrowserRouter` e `CartProvider`):
+        ```jsx
+        // src/main.jsx
+        import 'bootstrap/dist/css/bootstrap.min.css';
+        import React from 'react';
+        import ReactDOM from 'react-dom/client';
+        import App from './App.jsx';
+        import './index.css';
+        import { BrowserRouter } from 'react-router-dom';
+        import { CartProvider } from './context/CartContext';
+        import { AuthProvider } from './context/AuthContext'; // Importar AuthProvider
+
+        ReactDOM.createRoot(document.getElementById('root')).render(
+          <React.StrictMode>
+            <BrowserRouter>
+              <CartProvider>
+                <AuthProvider> {/* Envolver App com AuthProvider */}
+                  <App />
+                </AuthProvider>
+              </CartProvider>
+            </BrowserRouter>
+          </React.StrictMode>,
+        );
+        ```
+    *   Salve o arquivo.
+
+#### **Passo 3: Criar a Página de Login (`LoginPage.jsx`)**
+
+Vamos refatorar a página de login para usar o React Hook Form e interagir com o `AuthContext`.
+
+1.  **Modificar `src/pages/LoginPage.jsx`:**
+    *   Importe `useForm`, `Form`, `Button`, `Alert` do React-Bootstrap e `useAuth`, `useNavigate`.
+    *   Implemente o formulário de login e a lógica de autenticação.
+        ```jsx
+        // src/pages/LoginPage.jsx
+        import React, { useState } from 'react';
+        import { useForm } from 'react-hook-form';
+        import { Form, Button, Alert } from 'react-bootstrap';
+        import { useNavigate } from 'react-router-dom';
+        import { useAuth } from '../context/AuthContext'; // Importar useAuth
+
+        function LoginPage() {
+          const { register, handleSubmit, formState: { errors } } = useForm();
+          const { login, isAuthenticated } = useAuth(); // Obter login e isAuthenticated do contexto
+          const navigate = useNavigate();
+          const [loginError, setLoginError] = useState(null);
+
+          // Se já estiver autenticado, redirecionar para a home
+          React.useEffect(() => {
+            if (isAuthenticated) {
+              navigate('/');
+            }
+          }, [isAuthenticated, navigate]);
+
+          const onSubmit = (data) => {
+            // Simular chamada de API de login
+            if (data.email === 'teste@pizzaria.com' && data.password === '123456') {
+              const fakeToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IlVzdWFyaW8gVGVzdGUiLCJpYXQiOjE1MTYyMzkwMjJ9.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c';
+              login(fakeToken); // Chamar a função login do contexto
+              navigate('/'); // Redirecionar para a página inicial
+            } else {
+              setLoginError('Email ou senha inválidos.');
+            }
+          };
+
+          if (isAuthenticated) {
+            return <p>Você já está logado. Redirecionando...</p>;
+          }
+
+          return (
+            <div>
+              <h1>Login</h1>
+              <p>Acesse sua conta para fazer pedidos.</p>
+              {loginError && <Alert variant="danger">{loginError}</Alert>}
+              <Form onSubmit={handleSubmit(onSubmit)} className="mt-4">
+                <Form.Group className="mb-3" controlId="formBasicEmail">
+                  <Form.Label>Email</Form.Label>
+                  <Form.Control
+                    type="email"
+                    placeholder="Digite seu email"
+                    {...register('email', { required: 'Email é obrigatório' })}
+                  />
+                  {errors.email && <p className="text-danger">{errors.email.message}</p>}
+                </Form.Group>
+
+                <Form.Group className="mb-3" controlId="formBasicPassword">
+                  <Form.Label>Senha</Form.Label>
+                  <Form.Control
+                    type="password"
+                    placeholder="Senha"
+                    {...register('password', { required: 'Senha é obrigatória' })}
+                  />
+                  {errors.password && <p className="text-danger">{errors.password.message}</p>}
+                </Form.Group>
+
+                <Button variant="primary" type="submit">
+                  Entrar
+                </Button>
+              </Form>
+            </div>
+          );
+        }
+
+        export default LoginPage;
+        ```
+    *   **Explicação:** O formulário usa React Hook Form para validação. Ao submeter, ele simula um login e, se bem-sucedido, chama `login` do `AuthContext` e redireciona. Se o usuário já estiver logado, ele é redirecionado automaticamente.
+    *   Salve o arquivo.
+
+#### **Passo 4: Criar Componente de Rota Protegida (`ProtectedRoute.jsx`)**
+
+Este componente será usado para envolver rotas que só podem ser acessadas por usuários autenticados.
+
+1.  **Criar `src/components/ProtectedRoute.jsx`:**
+    ```jsx
+    // src/components/ProtectedRoute.jsx
+    import React from 'react';
+    import { Navigate, Outlet } from 'react-router-dom';
+    import { useAuth } from '../context/AuthContext'; // Importar useAuth
+
+    function ProtectedRoute() {
+      const { isAuthenticated } = useAuth(); // Verificar se o usuário está autenticado
+
+      if (!isAuthenticated) {
+        // Se não estiver autenticado, redireciona para a página de login
+        return <Navigate to="/login" replace />; // 'replace' impede que o usuário volte para a página protegida com o botão 'voltar'
+      }
+
+      // Se estiver autenticado, renderiza o conteúdo da rota filha
+      return <Outlet />;
+    }
+
+    export default ProtectedRoute;
+    ```
+    *   **Explicação:** O `ProtectedRoute` usa `useAuth` para verificar `isAuthenticated`. Se falso, ele redireciona para `/login` usando `Navigate`. Caso contrário, ele renderiza o `Outlet`, que é o componente da rota filha que ele está protegendo.
+    *   Salve o arquivo.
+
+#### **Passo 5: Proteger Rotas no `App.jsx`**
+
+Agora, vamos aplicar a proteção às rotas que exigem autenticação.
+
+1.  **Modificar `src/App.jsx`:**
+    *   Importe `ProtectedRoute`.
+    *   Use `ProtectedRoute` para envolver as rotas `/carrinho` e `/pedido` (se houver).
+        ```jsx
+        // src/App.jsx (trecho das rotas)
+        import React from 'react';
+        import Header from './components/Header';
+        import Footer from './components/Footer';
+        import { Container } from 'react-bootstrap';
+        import { Routes, Route } from 'react-router-dom';
+
+        import HomePage from './pages/HomePage';
+        import CardapioPage from './pages/CardapioPage';
+        import CarrinhoPage from './pages/CarrinhoPage';
+        import LoginPage from './pages/LoginPage';
+        import DetalhePizzaPage from './pages/DetalhePizzaPage';
+        import ProtectedRoute from './components/ProtectedRoute'; // Importar ProtectedRoute
+
+        function App() {
+          return (
+            <div className="d-flex flex-column min-vh-100">
+              <Header />
+              <Container className="flex-grow-1 mt-4">
+                <Routes>
+                  <Route path="/" element={<HomePage />} />
+                  <Route path="/cardapio" element={<CardapioPage />} />
+                  <Route path="/login" element={<LoginPage />} />
+                  <Route path="/pizza/:id" element={<DetalhePizzaPage />} />
+
+                  {/* Rotas Protegidas */}
+                  <Route element={<ProtectedRoute />}> {/* Envolve as rotas protegidas */}
+                    <Route path="/carrinho" element={<CarrinhoPage />} />
+                    {/* Adicione outras rotas protegidas aqui, ex: <Route path="/perfil" element={<ProfilePage />} /> */}
+                  </Route>
+
+                  {/* Rota para 404 - Página não encontrada */}
+                  <Route path="*" element={<h1>404 - Página Não Encontrada</h1>} />
+                </Routes>
+              </Container>
+              <Footer />
+            </div>
+          );
+        }
+
+        export default App;
+        ```
+    *   **Explicação:** A rota `<Route element={<ProtectedRoute />}>` age como um layout para suas rotas filhas. Se o `ProtectedRoute` permitir, ele renderiza o `Outlet`, que por sua vez renderiza o `CarrinhoPage`.
+    *   Salve o arquivo.
+
+#### **Passo 6: Exibição Condicional no `Header` (Login/Logout)**
+
+Vamos ajustar o `Header` para mostrar opções diferentes dependendo se o usuário está logado ou não.
+
+1.  **Modificar `src/components/Header.jsx`:**
+    *   Importe `useAuth`.
+    *   Use `isAuthenticated` e `logout` do contexto para renderizar condicionalmente os links.
+        ```jsx
+        // src/components/Header.jsx
+        import React from 'react';
+        import { Navbar, Container, Nav, Badge, Button } from 'react-bootstrap'; // Importar Button
+        import { Link, NavLink, useNavigate } from 'react-router-dom'; // Importar useNavigate
+        import { useCart } from '../context/CartContext';
+        import { useAuth } from '../context/AuthContext'; // Importar useAuth
+
+        function Header() {
+          const { cartState } = useCart();
+          const { isAuthenticated, user, logout } = useAuth(); // Obter isAuthenticated, user e logout
+          const navigate = useNavigate();
+          const totalItems = cartState.items.reduce((sum, item) => sum + item.quantity, 0);
+
+          const handleLogout = () => {
+            logout();
+            navigate('/login'); // Redirecionar para login após logout
+          };
+
+          return (
+            <Navbar bg="dark" variant="dark" expand="lg">
+              <Container>
+                <Navbar.Brand as={Link} to="/">Pizzaria Digital</Navbar.Brand>
+                <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                <Navbar.Collapse id="basic-navbar-nav">
+                  <Nav className="me-auto">
+                    <NavLink as={Link} to="/" className="nav-link">Home</NavLink>
+                    <NavLink as={Link} to="/cardapio" className="nav-link">Cardápio</NavLink>
+                    <NavLink as={Link} to="/carrinho" className="nav-link">
+                      Carrinho <Badge bg="secondary">{totalItems}</Badge>
+                    </NavLink>
+                  </Nav>
+                  <Nav>
+                    {isAuthenticated ? (
+                      <> {/* Fragmento para agrupar elementos */}
+                        <Navbar.Text className="me-3">Olá, {user?.name}!</Navbar.Text>
+                        <Button variant="outline-light" onClick={handleLogout}>Sair</Button>
+                      </>
+                    ) : (
+                      <NavLink as={Link} to="/login" className="nav-link">Login</NavLink>
+                    )}
+                  </Nav>
+                </Navbar.Collapse>
+              </Container>
+            </Navbar>
+          );
+        }
+
+        export default Header;
+        ```
+    *   **Explicação:** O `Header` agora verifica `isAuthenticated`. Se verdadeiro, mostra uma mensagem de boas-vindas e um botão "Sair". Caso contrário, mostra o link "Login". O botão "Sair" chama `logout` do contexto e redireciona para a página de login.
+    *   Salve o arquivo.
+
+#### **Passo 7: Verificação e Encerramento da Quinzena 6**
+
+1.  **Testar o Fluxo de Autenticação:**
+    *   Abra a aplicação no navegador. Tente acessar `/carrinho` diretamente. Você deverá ser redirecionado para `/login`.
+    *   Vá para `/login` e use `teste@pizzaria.com` e `123456` para logar. Observe que o `Header` muda para "Olá, Usuário Teste!" e um botão "Sair".
+    *   Agora, tente acessar `/carrinho` novamente. Você deverá ter acesso.
+    *   Clique em "Sair". Você deverá ser redirecionado para `/login` e o `Header` voltará ao normal.
+    *   Recarregue a página após o login e verifique se o status de autenticação persiste (graças ao `localStorage`).
+2.  **Revisão:** Verifique o console do navegador para quaisquer erros ou avisos.
+3.  **Encerramento do Vídeo/Laboratório:** Resuma a importância da autenticação em SPAs, como a Context API foi usada para gerenciar o estado de autenticação globalmente, e como o React Router DOM permite proteger rotas. Destaque o uso de `ProtectedRoute` e a exibição condicional de UI. Mencione que este é o fim do primeiro trimestre, e os alunos têm uma base sólida para continuar desenvolvendo aplicações React.
