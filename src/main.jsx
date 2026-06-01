@@ -5,13 +5,16 @@ import App from './App.jsx'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter } from 'react-router-dom';
 import { CartProvider } from './context/CartContext.jsx'
+import { AuthProvider } from './context/AuthContext.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <BrowserRouter>
       <CartProvider>
-        <App />
+        <AuthProvider>
+          <App />  
+        </AuthProvider>  
       </CartProvider>
-    </BrowserRouter> {/* Envolve o App com BrowserRouter para habilitar o roteamento das páginas */}
+    </BrowserRouter> {/* Envolve o App com BrowserRouter para habilitar o roteamento das pï¿½ginas */}
   </StrictMode>,
 )
